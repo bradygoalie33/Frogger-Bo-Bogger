@@ -26,7 +26,10 @@ struct Frog
 	Point leftUpLegLower;
 	Point leftDownLegUpper;
 	Point leftDownLegLower;
-	Point Body;
+	Point BodyTopLeft;
+	Point BodyTopRight;
+	Point BodyBottomLeft;
+	Point BodyBottomRight;
 	Point rightUpLegUpper;
 	Point rightUpLegLower;
 	Point rightDownLegUpper;
@@ -38,13 +41,16 @@ struct Frog
 	Frog() :
 		leftUpLegUpper(-50, 50),
 		leftUpLegLower(-50, 25),
-		leftDownLegUpper(-50,0),
-		leftDownLegLower(-50,-25),
-		rightUpLegUpper(0,50),
-		rightUpLegLower(0,25),
-		rightDownLegLower(0,0),
-		rightDownLegUpper(0,-25),
-		Body(-25, 0),
+		leftDownLegUpper(-50, 0),
+		leftDownLegLower(-50, -25),
+		rightUpLegUpper(0, 50),
+		rightUpLegLower(0, 25),
+		rightDownLegLower(0, 0),
+		rightDownLegUpper(0, -25),
+		BodyTopLeft(0, 0),
+		BodyTopRight(0,50),
+		BodyBottomLeft(50,0),
+		BodyBottomRight(50,50),
 		
 		meBase(400, 400)
 	{}
@@ -55,6 +61,10 @@ struct Frog
 			drawLine(g, meBase + leftDownLegUpper, meBase + leftDownLegLower);
 			drawLine(g, meBase + rightUpLegUpper, meBase + rightUpLegLower);
 			drawLine(g, meBase + rightDownLegUpper, meBase + rightDownLegLower);
+			drawLine(g, meBase + BodyBottomLeft, meBase + BodyBottomRight);
+			drawLine(g, meBase + BodyBottomLeft, meBase + BodyTopLeft);
+			drawLine(g, meBase + BodyBottomRight, meBase + BodyTopRight);
+			drawLine(g, meBase + BodyTopLeft, meBase + BodyTopRight);
 			
 		}
 		void Intergrate()
