@@ -6,12 +6,15 @@ using::std::endl;
 
 int baseX = 0;
 int baseY = 2;
+
 static bool moveUp = false;
 static bool moveDown = false;
 static bool moveLeft = false;
 static bool moveRight = false;
-static float frogX = 400;
-static float frogY = 500;
+static bool gameStarting = true;
+
+static float frogX = 20;
+static float frogY = 20;
 
 struct Point
 {
@@ -57,27 +60,26 @@ struct Frog
 	Point eyeX;
 
 	Frog() :
-		leftUpLegUpper(-50, 50),
-		leftUpLegLower(-50, 25),
-		leftDownLegUpper(-50, 0),
-		leftDownLegLower(-50, -25),
-		rightUpLegUpper(0, 50),
-		rightUpLegLower(0, 25),
-		rightDownLegLower(0, 0),
-		rightDownLegUpper(0, -25),
+		
+		meBase(frogX, frogY),
 
-		BodyTopLeft(-35, -5),
-		BodyTopRight(-15, -5),
-		BodyBottomLeft(-35, 30),
-		BodyBottomRight(-15, 30),
+		leftUpLegUpper(625, 775 + 70),
+		leftUpLegLower(625, 750 + 70),
+		leftDownLegUpper(625, 725 + 70),
+		leftDownLegLower(625, 700 + 70),
+		rightUpLegUpper(675, 775 + 70),
+		rightUpLegLower(675, 750 + 70),
+		rightDownLegLower(675, 725 + 70),
+		rightDownLegUpper(675, 700 + 70),
+
+		BodyTopLeft(640, 720 + 70),
+		BodyTopRight(660, 720 + 70),
+		BodyBottomLeft(640, 755 + 70),
+		BodyBottomRight(660, 755 + 70)
 
 
-		eyeX(0, 0),
-		eyeY(5, 5),
-
-		meBase(frogX, frogY)
 	{}
-		void drawTheyself(Core::Graphics& g)
+		void drawThyself(Core::Graphics& g)
 		{
 			g.SetColor(RGB(100, 255, 100));
 			drawLine(g, meBase + leftUpLegUpper, meBase + leftUpLegLower);
@@ -92,7 +94,7 @@ struct Frog
 			drawLine(g, meBase + leftDownLegUpper, meBase + BodyTopLeft);
 			drawLine(g, meBase + rightUpLegLower, meBase + BodyBottomRight);
 			drawLine(g, meBase + rightDownLegLower, meBase + BodyTopRight);
-
+			
 			
 		}
 		void Integrate()
@@ -107,10 +109,10 @@ Frog frog;
 void checkKeyInput()
 {
 	
-	float vAcceleration = 30;
-	float hAcceleration = 50;
+	float vAcceleration = 85;
+	float hAcceleration = 75;
 	Point jumpX(10, 0);
-	if (Core::Input::IsPressed(Core::Input::KEY_UP) && moveUp == false && (frog.velocity.y > 30))
+	if (Core::Input::IsPressed(Core::Input::KEY_UP) && moveUp == false && (frog.velocity.y > -700))
 	{
 		frog.velocity.y -= vAcceleration;
 		frogY -= vAcceleration;
@@ -119,7 +121,7 @@ void checkKeyInput()
 	else if (!Core::Input::IsPressed(Core::Input::KEY_UP) && moveUp == true)
 		moveUp = false;
 
-	if (Core::Input::IsPressed(Core::Input::KEY_DOWN) && moveDown == false && (frog.velocity.y < 750))
+	if (Core::Input::IsPressed(Core::Input::KEY_DOWN) && moveDown == false && (frog.velocity.y < 0))
 	{
 		frog.velocity.y += vAcceleration;
 		moveDown = true;
@@ -127,7 +129,7 @@ void checkKeyInput()
 	else if (!Core::Input::IsPressed(Core::Input::KEY_DOWN) && moveDown == true)
 		moveDown = false;
 
-	if (Core::Input::IsPressed(Core::Input::KEY_RIGHT) && moveRight == false && (frog.velocity.x < 1200))
+	if (Core::Input::IsPressed(Core::Input::KEY_RIGHT) && moveRight == false && (frog.velocity.x < 500))
 	{
 		frog.velocity.x += hAcceleration;
 		moveRight = true;
@@ -135,7 +137,7 @@ void checkKeyInput()
 	else if (!Core::Input::IsPressed(Core::Input::KEY_RIGHT) && moveRight == true)
 		moveRight = false;
 
-	if (Core::Input::IsPressed(Core::Input::KEY_LEFT) && moveLeft == false && (frog.velocity.x > 50))
+	if (Core::Input::IsPressed(Core::Input::KEY_LEFT) && moveLeft == false && (frog.velocity.x > -600))
 	{
 		frog.velocity.x -= hAcceleration;
 		moveLeft = true;
@@ -152,15 +154,33 @@ bool myUpdate(float dt)
 	return false;
 }
 
+void gameBackground(Core::Graphics& graphics)
+{
+	graphics.SetColor(RGB(255, 255, 255));
+	graphics.DrawLine(0, 765, 1250, 765);
+
+	graphics.SetColor(RGB(0, 0, 205));
+	int i = 0;
+	for (i; i > -175; i--)
+	graphics.DrawLine(0, 255 + i, 1250, 255 + i);
+	
+	graphics.SetColor(RGB(85, 107, 47));
+	int j = 0;
+	for (j; j > -85; j--)
+		graphics.DrawLine(0, 85 + j, 1250, 85 + j);
+	
+}
+
 void myDraw(Core::Graphics & graphics)
 {
-
-	frog.drawTheyself(graphics);
+	gameBackground(graphics);
+	frog.drawThyself(graphics);
+	
 }
 
 void main()
 {
-	Core::Init("My Game", 1210, 800);
+	Core::Init("My Game", 1210, 850);
 	Core::RegisterUpdateFn(myUpdate);
 	Core::RegisterDrawFn(myDraw);
 	Core::GameLoop();
