@@ -32,7 +32,7 @@ public:
 
 	void Flip();
 
-private:
+//private:
 	Graphics( Window wnd, int width, int height );
 	int width;
 	int height;
