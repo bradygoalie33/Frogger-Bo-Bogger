@@ -10,6 +10,8 @@ static bool moveUp = false;
 static bool moveDown = false;
 static bool moveLeft = false;
 static bool moveRight = false;
+static float frogX = 400;
+static float frogY = 500;
 
 struct Point
 {
@@ -30,8 +32,7 @@ void drawLine(Core::Graphics& g, const Point& left, const Point& right)
 }
 struct Frog
 {
-	float frogX = 400;
-	float frogY = 400;
+	
 	Point leftUpLegUpper;
 	Point leftUpLegLower;
 	Point leftDownLegUpper;
@@ -44,6 +45,11 @@ struct Frog
 	Point rightUpLegLower;
 	Point rightDownLegUpper;
 	Point rightDownLegLower;
+
+	Point connectUpLeft;
+	Point connectUpRight;
+	Point connectDownLeft;
+	Point connectDownRight;
 
 	Point meBase;
 	Point velocity;
@@ -59,10 +65,13 @@ struct Frog
 		rightUpLegLower(0, 25),
 		rightDownLegLower(0, 0),
 		rightDownLegUpper(0, -25),
-		BodyTopLeft(-50, 0),
-		BodyTopRight(-50, 25),
-		BodyBottomLeft(0, 0),
-		BodyBottomRight(0, 25),
+
+		BodyTopLeft(-35, -5),
+		BodyTopRight(-15, -5),
+		BodyBottomLeft(-35, 30),
+		BodyBottomRight(-15, 30),
+
+
 		eyeX(0, 0),
 		eyeY(5, 5),
 
@@ -79,8 +88,12 @@ struct Frog
 			drawLine(g, meBase + BodyBottomLeft, meBase + BodyTopLeft);
 			drawLine(g, meBase + BodyBottomRight, meBase + BodyTopRight);
 			drawLine(g, meBase + BodyTopLeft, meBase + BodyTopRight);
-			g.SetColor(RGB(255, 255, 255));
-			Ellipse(g.memDC, 10, 10, 20, 20);
+			drawLine(g, meBase + leftUpLegLower, meBase + BodyBottomLeft);
+			drawLine(g, meBase + leftDownLegUpper, meBase + BodyTopLeft);
+			drawLine(g, meBase + rightUpLegLower, meBase + BodyBottomRight);
+			drawLine(g, meBase + rightDownLegLower, meBase + BodyTopRight);
+
+			
 		}
 		void Integrate()
 		{
@@ -94,35 +107,37 @@ Frog frog;
 void checkKeyInput()
 {
 	
-	float acceleration = 30;
+	float vAcceleration = 30;
+	float hAcceleration = 50;
 	Point jumpX(10, 0);
-	if (Core::Input::IsPressed(Core::Input::KEY_UP) && moveUp == false)
+	if (Core::Input::IsPressed(Core::Input::KEY_UP) && moveUp == false && (frog.velocity.y > 30))
 	{
-		frog.velocity.y -= acceleration;
+		frog.velocity.y -= vAcceleration;
+		frogY -= vAcceleration;
 		moveUp = true;
 	}
 	else if (!Core::Input::IsPressed(Core::Input::KEY_UP) && moveUp == true)
 		moveUp = false;
 
-	if (Core::Input::IsPressed(Core::Input::KEY_DOWN) && moveDown == false)
+	if (Core::Input::IsPressed(Core::Input::KEY_DOWN) && moveDown == false && (frog.velocity.y < 750))
 	{
-		frog.velocity.y += acceleration;
+		frog.velocity.y += vAcceleration;
 		moveDown = true;
 	}
 	else if (!Core::Input::IsPressed(Core::Input::KEY_DOWN) && moveDown == true)
 		moveDown = false;
 
-	if (Core::Input::IsPressed(Core::Input::KEY_RIGHT) && moveRight == false)
+	if (Core::Input::IsPressed(Core::Input::KEY_RIGHT) && moveRight == false && (frog.velocity.x < 1200))
 	{
-		frog.velocity.x += acceleration;
+		frog.velocity.x += hAcceleration;
 		moveRight = true;
 	}
 	else if (!Core::Input::IsPressed(Core::Input::KEY_RIGHT) && moveRight == true)
 		moveRight = false;
 
-	if (Core::Input::IsPressed(Core::Input::KEY_LEFT) && moveLeft == false)
+	if (Core::Input::IsPressed(Core::Input::KEY_LEFT) && moveLeft == false && (frog.velocity.x > 50))
 	{
-		frog.velocity.x -= acceleration;
+		frog.velocity.x -= hAcceleration;
 		moveLeft = true;
 	}
 	else if (!Core::Input::IsPressed(Core::Input::KEY_LEFT) && moveLeft == true)
@@ -145,7 +160,7 @@ void myDraw(Core::Graphics & graphics)
 
 void main()
 {
-	Core::Init("My Game", 1200, 800);
+	Core::Init("My Game", 1210, 800);
 	Core::RegisterUpdateFn(myUpdate);
 	Core::RegisterDrawFn(myDraw);
 	Core::GameLoop();
