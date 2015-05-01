@@ -162,8 +162,8 @@ void gameBackground(Core::Graphics& graphics)
 	graphics.SetColor(RGB(255, 255, 255));
 	for (i = 0; i < 3; i++)
 	{
-		graphics.DrawLine(0, 765 - i, 1250, 765 - i);
-		graphics.DrawLine(0, 340 + i, 1250, 340 + i);
+		graphics.DrawLine(0, 765.0f - i, 1250.0f, 765.0f - i);
+		graphics.DrawLine(0, 340.0f + i, 1250.0f, 340.0f + i);
 	}
 	
 
@@ -171,10 +171,10 @@ void gameBackground(Core::Graphics& graphics)
 	{
 		for (i = 0; i < 53; i++)
 		{
-			int b = 50;
-			int c = b*k;
-			graphics.DrawLine(c, 425, c+i, 425);
-			graphics.DrawLine(c, 595, c+i, 595);
+			float b = 50;
+			float c = b*k;
+			graphics.DrawLine(c, 425.0f, c + i, 425.0f);
+			graphics.DrawLine(c, 595.0f, c + i, 595.0f);
 
 		}
 	}
@@ -186,10 +186,10 @@ void gameBackground(Core::Graphics& graphics)
 	{
 		for (i = 0; i < 50; i++)
 		{
-			int b = 50;
-			int c = b*k;
-			graphics.DrawLine(c, 680, c+i, 680);
-			graphics.DrawLine(c, 510, c+i, 510);
+			float b = 50;
+			float c = b*k;
+			graphics.DrawLine(c, 680.0f, c + i, 680.0f);
+			graphics.DrawLine(c, 510.0f, c + i, 510.0f);
 		}
 	}
 
@@ -199,25 +199,25 @@ void gameBackground(Core::Graphics& graphics)
 	graphics.SetColor(RGB(0, 0, 205));
 	
 	for (i = 0; i > -275; i--)
-	graphics.DrawLine(0, 255 + i, 1250, 255 + i);
+		graphics.DrawLine(0.0f, 255.0f + i, 1250.0f, 255.0f + i);
 	
 	//LANDING STRIPS
 	graphics.SetColor(RGB(85, 107, 47));
 	
 	for (i = 0; i > -85; i--)
 	{
-		graphics.DrawLine(80, 85 + i, 240, 85 + i);
-		graphics.DrawLine(390, 85 + i, 540, 85 + i);
-		graphics.DrawLine(690, 85 + i, 840, 85 + i);
-		graphics.DrawLine(990, 85 + i, 1140, 85 + i);
+		graphics.DrawLine(80.0f, 85.0f + i, 240.0f, 85.0f + i);
+		graphics.DrawLine(390.0f, 85.0f + i, 540.0f, 85.0f + i);
+		graphics.DrawLine(690.0f, 85.0f + i, 840.0f, 85.0f + i);
+		graphics.DrawLine(990.0f, 85.0f + i, 1140.0f, 85.0f + i);
 	}
 
 	//Front and WaterSide Safezones
 	graphics.SetColor(RGB(85, 107, 47));
 	for (i = 0; i < 85; i++)
 	{
-		graphics.DrawLine(0, 255 + i, 1250, 255 + i);
-		graphics.DrawLine(0, 850 - i, 1250, 850 - i);
+		graphics.DrawLine(0.0f, 255.0f + i, 1250.0f, 255.0f + i);
+		graphics.DrawLine(0.0f, 850.0f - i, 1250.0f, 850.0f - i);
 	}
 	
 }
