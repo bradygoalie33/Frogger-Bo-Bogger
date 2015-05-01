@@ -33,6 +33,38 @@ void drawLine(Core::Graphics& g, const Point& left, const Point& right)
 {
 	g.DrawLine(left.x, left.y, right.x, right.y);
 }
+
+struct car
+{
+	Point topLeft;
+	Point topRight;
+	Point bottomLeft;
+	Point bottomRight;
+	
+	Point meBase;
+	Point velocity;
+
+
+	car(Point topleft, Point topright, Point bottomleft, Point bottomright){
+		meBase = (400, 400);
+		topLeft = topleft;
+		topRight = topright;
+		bottomLeft = bottomleft;
+		bottomRight = bottomright;
+	}
+
+	void drawthyself(Core::Graphics& g){
+		g.SetColor(RGB(255, 0, 0));
+		drawLine(g, meBase + topLeft, meBase + topRight);
+		drawLine(g, meBase + topRight, meBase + bottomRight);
+		drawLine(g, meBase + bottomRight, meBase + bottomLeft);
+		drawLine(g, meBase + bottomLeft, meBase + topLeft);
+	}
+	void integrate(){
+		meBase + velocity;
+	}
+};
+
 struct Frog
 {
 	
