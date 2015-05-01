@@ -187,19 +187,70 @@ bool myUpdate(float dt)
 }
 
 void gameBackground(Core::Graphics& graphics)
-{
+{	
+	int i;
+	int k;
+	//WHITE ROAD LINES
 	graphics.SetColor(RGB(255, 255, 255));
-	graphics.DrawLine(0, 765, 1250, 765);
-
-	graphics.SetColor(RGB(0, 0, 205));
-	int i = 0;
-	for (i; i > -175; i--)
-	graphics.DrawLine(0, 255 + i, 1250, 255 + i);
+	for (i = 0; i < 3; i++)
+	{
+		graphics.DrawLine(0, 765.0f - i, 1250.0f, 765.0f - i);
+		graphics.DrawLine(0, 340.0f + i, 1250.0f, 340.0f + i);
+	}
 	
+
+	for (k = 0; k < 26; k += 2)
+	{
+		for (i = 0; i < 53; i++)
+		{
+			float b = 50;
+			float c = b*k;
+			graphics.DrawLine(c, 425.0f, c + i, 425.0f);
+			graphics.DrawLine(c, 595.0f, c + i, 595.0f);
+
+		}
+	}
+
+	//YELLOW ROAD LINES
+	graphics.SetColor(RGB(250, 210, 1));
+	
+	for (k = 0; k < 26; k+=2)
+	{
+		for (i = 0; i < 50; i++)
+		{
+			float b = 50;
+			float c = b*k;
+			graphics.DrawLine(c, 680.0f, c + i, 680.0f);
+			graphics.DrawLine(c, 510.0f, c + i, 510.0f);
+		}
+	}
+
+
+
+	//WATER
+	graphics.SetColor(RGB(0, 0, 205));
+	
+	for (i = 0; i > -275; i--)
+		graphics.DrawLine(0.0f, 255.0f + i, 1250.0f, 255.0f + i);
+	
+	//LANDING STRIPS
 	graphics.SetColor(RGB(85, 107, 47));
-	int j = 0;
-	for (j; j > -85; j--)
-		graphics.DrawLine(0, 85 + j, 1250, 85 + j);
+	
+	for (i = 0; i > -85; i--)
+	{
+		graphics.DrawLine(80.0f, 85.0f + i, 240.0f, 85.0f + i);
+		graphics.DrawLine(390.0f, 85.0f + i, 540.0f, 85.0f + i);
+		graphics.DrawLine(690.0f, 85.0f + i, 840.0f, 85.0f + i);
+		graphics.DrawLine(990.0f, 85.0f + i, 1140.0f, 85.0f + i);
+	}
+
+	//Front and WaterSide Safezones
+	graphics.SetColor(RGB(85, 107, 47));
+	for (i = 0; i < 85; i++)
+	{
+		graphics.DrawLine(0.0f, 255.0f + i, 1250.0f, 255.0f + i);
+		graphics.DrawLine(0.0f, 850.0f - i, 1250.0f, 850.0f - i);
+	}
 	
 }
 
