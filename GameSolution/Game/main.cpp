@@ -50,6 +50,7 @@ struct Car
 
 	Car() :
 
+		meBase(100,100),
 		topLeft(0,0),
 		topRight(10,0),
 		bottomLeft(0,10),
@@ -72,10 +73,10 @@ struct Car
 			g.SetColor(RGB(255, 255, 255));
 		}
 
-		drawLine(g, topLeft, topRight);
-		drawLine(g, topRight, bottomRight);
-		drawLine(g, bottomRight, bottomLeft);
-		drawLine(g, bottomLeft, topLeft);
+		drawLine(g, meBase + topLeft, meBase + topRight);
+		drawLine(g, meBase + topRight, meBase + bottomRight);
+		drawLine(g, meBase + bottomRight, meBase + bottomLeft);
+		drawLine(g, meBase + bottomLeft, meBase + topLeft);
 	}
 	void integrate(){
 		meBase + velocity;
@@ -94,7 +95,7 @@ struct Car2
 	Point velocity;
 
 	Car2() :
-
+		meBase(100, 100),
 		topLeft(20, 20),
 		topRight(30, 20),
 		bottomLeft(20, 30),
@@ -117,10 +118,10 @@ struct Car2
 			g.SetColor(RGB(255, 255, 255));
 		}
 
-		drawLine(g, topLeft, topRight);
-		drawLine(g, topRight, bottomRight);
-		drawLine(g, bottomRight, bottomLeft);
-		drawLine(g, bottomLeft, topLeft);
+		drawLine(g, meBase + topLeft, meBase + topRight);
+		drawLine(g, meBase + topRight, meBase + bottomRight);
+		drawLine(g, meBase + bottomRight, meBase + bottomLeft);
+		drawLine(g, meBase + bottomLeft, meBase + topLeft);
 	}
 	void integrate(){
 		meBase + velocity;
@@ -139,7 +140,7 @@ struct Car3
 	Point velocity;
 
 	Car3() :
-
+		meBase(100, 100),
 		topLeft(70, 70),
 		topRight(80, 70),
 		bottomLeft(70, 80),
@@ -162,10 +163,10 @@ struct Car3
 			g.SetColor(RGB(255, 255, 255));
 		}
 
-		drawLine(g, topLeft, topRight);
-		drawLine(g, topRight, bottomRight);
-		drawLine(g, bottomRight, bottomLeft);
-		drawLine(g, bottomLeft, topLeft);
+		drawLine(g, meBase + topLeft, meBase + topRight);
+		drawLine(g, meBase + topRight, meBase + bottomRight);
+		drawLine(g, meBase + bottomRight, meBase + bottomLeft);
+		drawLine(g, meBase + bottomLeft, meBase + topLeft);
 	}
 	void integrate(){
 		meBase + velocity;
@@ -184,7 +185,7 @@ struct Car4
 	Point velocity;
 
 	Car4() :
-
+		meBase(100, 100),
 		topLeft(110, 110),
 		topRight(120, 110),
 		bottomLeft(110, 120),
@@ -207,10 +208,10 @@ struct Car4
 			g.SetColor(RGB(255, 255, 255));
 		}
 
-		drawLine(g, topLeft, topRight);
-		drawLine(g, topRight, bottomRight);
-		drawLine(g, bottomRight, bottomLeft);
-		drawLine(g, bottomLeft, topLeft);
+		drawLine(g, meBase + topLeft, meBase + topRight);
+		drawLine(g, meBase + topRight, meBase + bottomRight);
+		drawLine(g, meBase + bottomRight, meBase + bottomLeft);
+		drawLine(g, meBase + bottomLeft, meBase + topLeft);
 	}
 	void integrate(){
 		meBase + velocity;
@@ -229,7 +230,7 @@ struct Car5
 	Point velocity;
 
 	Car5() :
-
+		meBase(100, 100),
 		topLeft(400, 400),
 		topRight(410, 400),
 		bottomLeft(400, 410),
@@ -252,10 +253,10 @@ struct Car5
 			g.SetColor(RGB(255, 255, 255));
 		}
 
-		drawLine(g, topLeft, topRight);
-		drawLine(g, topRight, bottomRight);
-		drawLine(g, bottomRight, bottomLeft);
-		drawLine(g, bottomLeft, topLeft);
+		drawLine(g, meBase + topLeft, meBase + topRight);
+		drawLine(g, meBase + topRight, meBase + bottomRight);
+		drawLine(g, meBase + bottomRight, meBase + bottomLeft);
+		drawLine(g, meBase + bottomLeft, meBase + topLeft);
 	}
 	void integrate(){
 		meBase + velocity;
