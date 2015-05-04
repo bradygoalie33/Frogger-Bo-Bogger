@@ -1,14 +1,14 @@
-﻿Build started 5/4/2015 10:28:55 AM.
-     1>Project "C:\Users\Brady Groharing\Desktop\Frogger-Bo-Bogger\GameSolution\Game\Game.vcxproj" on node 2 (Build target(s)).
+﻿Build started 5/4/2015 4:02:23 PM.
+     1>Project "C:\dev\Quarter3\Frogger-Bo-Bogger\Frogger-Bo-Bogger\GameSolution\Game\Game.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Brady Groharing\Desktop\Frogger-Bo-Bogger\GameSolution\\Engine" /I"C:\Users\Brady Groharing\Desktop\Frogger-Bo-Bogger\GameSolution\\Core\include" /ZI /nologo /W4 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\dev\Quarter3\Frogger-Bo-Bogger\Frogger-Bo-Bogger\GameSolution\\Engine" /I"C:\dev\Quarter3\Frogger-Bo-Bogger\Frogger-Bo-Bogger\GameSolution\\Core\include" /ZI /nologo /W4 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
-     1>c:\users\brady groharing\desktop\frogger-bo-bogger\gamesolution\game\main.cpp(310): warning C4100: 'dt' : unreferenced formal parameter
+     1>c:\dev\quarter3\frogger-bo-bogger\frogger-bo-bogger\gamesolution\game\main.cpp(411): warning C4100: 'dt' : unreferenced formal parameter
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Brady Groharing\Desktop\Frogger-Bo-Bogger\GameSolution\Debug\Game.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Brady Groharing\Desktop\Frogger-Bo-Bogger\GameSolution\Debug\\" /LIBPATH:"C:\Users\Brady Groharing\Desktop\Frogger-Bo-Bogger\GameSolution\\Core\lib" /LIBPATH:"C:\Users\Brady Groharing\Desktop\Frogger-Bo-Bogger\GameSolution\Debug\\" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib Engine.lib Core.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Brady Groharing\Desktop\Frogger-Bo-Bogger\GameSolution\Debug\Game.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"mainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Brady Groharing\Desktop\Frogger-Bo-Bogger\GameSolution\Debug\Game.lib" /MACHINE:X86 Debug\main.obj
-         Game.vcxproj -> C:\Users\Brady Groharing\Desktop\Frogger-Bo-Bogger\GameSolution\Debug\Game.exe
-     1>Done Building Project "C:\Users\Brady Groharing\Desktop\Frogger-Bo-Bogger\GameSolution\Game\Game.vcxproj" (Build target(s)).
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\dev\Quarter3\Frogger-Bo-Bogger\Frogger-Bo-Bogger\GameSolution\Debug\Game.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\dev\Quarter3\Frogger-Bo-Bogger\Frogger-Bo-Bogger\GameSolution\Debug\\" /LIBPATH:"C:\dev\Quarter3\Frogger-Bo-Bogger\Frogger-Bo-Bogger\GameSolution\\Core\lib" /LIBPATH:"C:\dev\Quarter3\Frogger-Bo-Bogger\Frogger-Bo-Bogger\GameSolution\Debug\\" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib Engine.lib Core.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\dev\Quarter3\Frogger-Bo-Bogger\Frogger-Bo-Bogger\GameSolution\Debug\Game.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"mainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\dev\Quarter3\Frogger-Bo-Bogger\Frogger-Bo-Bogger\GameSolution\Debug\Game.lib" /MACHINE:X86 Debug\main.obj
+         Game.vcxproj -> C:\dev\Quarter3\Frogger-Bo-Bogger\Frogger-Bo-Bogger\GameSolution\Debug\Game.exe
+     1>Done Building Project "C:\dev\Quarter3\Frogger-Bo-Bogger\Frogger-Bo-Bogger\GameSolution\Game\Game.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:03.36
+Time Elapsed 00:00:00.60
