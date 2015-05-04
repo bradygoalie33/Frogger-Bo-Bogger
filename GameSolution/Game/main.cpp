@@ -3,10 +3,13 @@
 
 using::std::cout;
 using::std::endl;
+using std::string;
 
 int baseX = 0;
 int baseY = 2;
 
+enum gameStates { Menu, GameOver, Paused, Playing };
+static gameStates gameState = Menu;
 static bool moveUp = false;
 static bool moveDown = false;
 static bool moveLeft = false;
@@ -22,6 +25,7 @@ struct Point
 	float y;
 	Point(float x = 0.0f, float y = 0.0f) :
 		x(x), y(y) {}
+	
 };
 
 Point operator+(const Point& left, const Point& right)
@@ -46,11 +50,9 @@ struct Car
 
 
 	Car(Point topleft, Point topright, Point bottomleft, Point bottomright){
-<<<<<<< HEAD
+
 		meBase = (100.0f, 100.0f);
-=======
-		meBase = (0, 0);
->>>>>>> origin/master
+
 		topLeft = topleft;
 		topRight = topright;
 		bottomLeft = bottomleft;
@@ -72,15 +74,15 @@ struct Car
 			g.SetColor(RGB(255, 255, 255));
 		}
 		
-		//drawLine(g, meBase + topLeft, meBase + topRight);
-		//drawLine(g, meBase + topRight, meBase + bottomRight);
-		//drawLine(g, meBase + bottomRight, meBase + bottomLeft);
-		//drawLine(g, meBase + bottomLeft, meBase + topLeft);
+		drawLine(g, meBase + topLeft, meBase + topRight);
+		drawLine(g, meBase + topRight, meBase + bottomRight);
+		drawLine(g, meBase + bottomRight, meBase + bottomLeft);
+		drawLine(g, meBase + bottomLeft, meBase + topLeft);
 
-		drawLine(g, topLeft, topRight);
-		drawLine(g, topRight, bottomRight);
-		drawLine(g, bottomRight, bottomLeft);
-		drawLine(g, bottomLeft, topLeft);
+		//drawLine(g, topLeft, topRight);
+		//drawLine(g, topRight, bottomRight);
+		//drawLine(g, bottomRight, bottomLeft);
+		//drawLine(g, bottomLeft, topLeft);
 	}
 	void integrate(){
 		meBase + velocity;
@@ -88,7 +90,6 @@ struct Car
 
 };
 
-<<<<<<< HEAD
 Car getRandCar(){
 	
 	int randInt = rand() % 5;
@@ -139,7 +140,7 @@ Car getRandCar(){
 	//	return car5;
 	//}
 
-	if (randInt == 0){
+	if(randInt == 0){
 		Point point1 = (640.0f, 720.0f + 70.0f);
 		Point point2 = (660.0f, 720.0f + 70.0f);
 		Point point3 = (640.0f, 755.0f + 70.0f);
@@ -186,9 +187,6 @@ Car getRandCar(){
 
 Car car = getRandCar();
 
-=======
-Car car((300, 300), (200, 200), (100, 100), (0, 0));
->>>>>>> origin/master
 
 struct Frog
 {
@@ -265,42 +263,48 @@ Frog frog;
 
 void checkKeyInput()
 {
-	
-	float vAcceleration = 85;
-	float hAcceleration = 75;
-	Point jumpX(10, 0);
-	if (Core::Input::IsPressed(Core::Input::KEY_UP) && moveUp == false && (frog.velocity.y > -700))
-	{
-		frog.velocity.y -= vAcceleration;
-		frogY -= vAcceleration;
-		moveUp = true;
-	}
-	else if (!Core::Input::IsPressed(Core::Input::KEY_UP) && moveUp == true)
-		moveUp = false;
+	//if (gameState == Playing){
+		float vAcceleration = 85;
+		float hAcceleration = 75;
+		Point jumpX(10, 0);
+		if (Core::Input::IsPressed(Core::Input::KEY_UP) && moveUp == false && (frog.velocity.y > -700))
+		{
+			frog.velocity.y -= vAcceleration;
+			frogY -= vAcceleration;
+			moveUp = true;
+		}
+		else if (!Core::Input::IsPressed(Core::Input::KEY_UP) && moveUp == true)
+			moveUp = false;
 
-	if (Core::Input::IsPressed(Core::Input::KEY_DOWN) && moveDown == false && (frog.velocity.y < 0))
-	{
-		frog.velocity.y += vAcceleration;
-		moveDown = true;
-	}
-	else if (!Core::Input::IsPressed(Core::Input::KEY_DOWN) && moveDown == true)
-		moveDown = false;
+		if (Core::Input::IsPressed(Core::Input::KEY_DOWN) && moveDown == false && (frog.velocity.y < 0))
+		{
+			frog.velocity.y += vAcceleration;
+			moveDown = true;
+		}
+		else if (!Core::Input::IsPressed(Core::Input::KEY_DOWN) && moveDown == true)
+			moveDown = false;
 
-	if (Core::Input::IsPressed(Core::Input::KEY_RIGHT) && moveRight == false && (frog.velocity.x < 500))
-	{
-		frog.velocity.x += hAcceleration;
-		moveRight = true;
-	}
-	else if (!Core::Input::IsPressed(Core::Input::KEY_RIGHT) && moveRight == true)
-		moveRight = false;
+		if (Core::Input::IsPressed(Core::Input::KEY_RIGHT) && moveRight == false && (frog.velocity.x < 500))
+		{
+			frog.velocity.x += hAcceleration;
+			moveRight = true;
+		}
+		else if (!Core::Input::IsPressed(Core::Input::KEY_RIGHT) && moveRight == true)
+			moveRight = false;
 
-	if (Core::Input::IsPressed(Core::Input::KEY_LEFT) && moveLeft == false && (frog.velocity.x > -600))
-	{
-		frog.velocity.x -= hAcceleration;
-		moveLeft = true;
-	}
-	else if (!Core::Input::IsPressed(Core::Input::KEY_LEFT) && moveLeft == true)
-		moveLeft = false;
+		if (Core::Input::IsPressed(Core::Input::KEY_LEFT) && moveLeft == false && (frog.velocity.x > -600))
+		{
+			frog.velocity.x -= hAcceleration;
+			moveLeft = true;
+		}
+		else if (!Core::Input::IsPressed(Core::Input::KEY_LEFT) && moveLeft == true)
+			moveLeft = false;
+	//}
+}
+
+void gameLogic()
+{
+
 }
 
 bool myUpdate(float dt)
@@ -308,96 +312,107 @@ bool myUpdate(float dt)
 	frog.Integrate();
 	car.integrate();
 	checkKeyInput();
-	
+	gameLogic();
 	return false;
 }
 
 void gameBackground(Core::Graphics& graphics)
 {	
-	int i;
-	int k;
-	//WHITE ROAD LINES
-	graphics.SetColor(RGB(255, 255, 255));
-	for (i = 0; i < 3; i++)
-	{
-		graphics.DrawLine(0, 765.0f - i, 1250.0f, 765.0f - i);
-		graphics.DrawLine(0, 340.0f + i, 1250.0f, 340.0f + i);
+	
+	if (gameState == Menu){
+
+		graphics.DrawString(1110/2, 850/2, "IT'S FROGGER, BITCH");
+		graphics.DrawString(1110 / 2, 900 / 2, "NEW GAME, NIGGA");
+		graphics.DrawString(1110 / 2, 950 / 2, "FUCK THIS SHIT, I'M OUT");
+		Ellipse(graphics.memDC, 650, 675, 625, 650);
 	}
 	
+	//else if (gameState == Playing){
+		int i;
+		int k;
 
-	for (k = 0; k < 26; k += 2)
-	{
-		for (i = 0; i < 53; i++)
+		//WHITE ROAD LINES
+		graphics.SetColor(RGB(255, 255, 255));
+		for (i = 0; i < 3; i++)
 		{
-			float b = 50;
-			float c = b*k;
-			graphics.DrawLine(c, 425.0f, c + i, 425.0f);
-			graphics.DrawLine(c, 595.0f, c + i, 595.0f);
-
+			graphics.DrawLine(0, 765.0f - i, 1250.0f, 765.0f - i);
+			graphics.DrawLine(0, 340.0f + i, 1250.0f, 340.0f + i);
 		}
-	}
 
-	//YELLOW ROAD LINES
-	graphics.SetColor(RGB(250, 210, 1));
-	
-	for (k = 0; k < 26; k+=2)
-	{
-		for (i = 0; i < 50; i++)
+
+		for (k = 0; k < 26; k += 2)
 		{
-			float b = 50;
-			float c = b*k;
-			graphics.DrawLine(c, 680.0f, c + i, 680.0f);
-			graphics.DrawLine(c, 510.0f, c + i, 510.0f);
+			for (i = 0; i < 53; i++)
+			{
+				float b = 50;
+				float c = b*k;
+				graphics.DrawLine(c, 425.0f, c + i, 425.0f);
+				graphics.DrawLine(c, 595.0f, c + i, 595.0f);
+
+			}
 		}
-	}
+
+		//YELLOW ROAD LINES
+		graphics.SetColor(RGB(250, 210, 1));
+
+		for (k = 0; k < 26; k += 2)
+		{
+			for (i = 0; i < 50; i++)
+			{
+				float b = 50;
+				float c = b*k;
+				graphics.DrawLine(c, 680.0f, c + i, 680.0f);
+				graphics.DrawLine(c, 510.0f, c + i, 510.0f);
+			}
+		}
 
 
 
-	//WATER
-	graphics.SetColor(RGB(0, 0, 205));
-	
-	for (i = 0; i > -275; i--)
-		graphics.DrawLine(0.0f, 255.0f + i, 1250.0f, 255.0f + i);
-	
-	//LANDING STRIPS
-	graphics.SetColor(RGB(85, 107, 47));
-	
-	for (i = 0; i > -85; i--)
-	{
-		graphics.DrawLine(80.0f, 85.0f + i, 240.0f, 85.0f + i);
-		graphics.DrawLine(390.0f, 85.0f + i, 540.0f, 85.0f + i);
-		graphics.DrawLine(690.0f, 85.0f + i, 840.0f, 85.0f + i);
-		graphics.DrawLine(990.0f, 85.0f + i, 1140.0f, 85.0f + i);
-	}
+		//WATER
+		graphics.SetColor(RGB(0, 0, 205));
+
+		for (i = 0; i > -275; i--)
+			graphics.DrawLine(0.0f, 255.0f + i, 1250.0f, 255.0f + i);
+
+		//LANDING STRIPS
+		graphics.SetColor(RGB(85, 107, 47));
+
+		for (i = 0; i > -85; i--)
+		{
+			graphics.DrawLine(80.0f, 85.0f + i, 240.0f, 85.0f + i);
+			graphics.DrawLine(390.0f, 85.0f + i, 540.0f, 85.0f + i);
+			graphics.DrawLine(690.0f, 85.0f + i, 840.0f, 85.0f + i);
+			graphics.DrawLine(990.0f, 85.0f + i, 1140.0f, 85.0f + i);
+		}
 		//LeftMostOutline
-	graphics.SetColor(RGB(0, 0, 0));
-	graphics.DrawLine(80.0f, 85.0f, 240.0f, 85.0f);
-	graphics.DrawLine(80.0f, 0.0f, 80.0f, 85.0f);
-	graphics.DrawLine(240.0f, 0.0f, 240.0f, 85.0f);
+		graphics.SetColor(RGB(0, 0, 0));
+		graphics.DrawLine(80.0f, 85.0f, 240.0f, 85.0f);
+		graphics.DrawLine(80.0f, 0.0f, 80.0f, 85.0f);
+		graphics.DrawLine(240.0f, 0.0f, 240.0f, 85.0f);
 		//CenterLeftOutline
-	graphics.DrawLine(390.0f, 85.0f, 540.0f, 85.0f);
-	graphics.DrawLine(390.0f, 0.0f, 390.0f, 85.0f);
-	graphics.DrawLine(540.0f, 0.0f, 540.0f, 85.0f);
+		graphics.DrawLine(390.0f, 85.0f, 540.0f, 85.0f);
+		graphics.DrawLine(390.0f, 0.0f, 390.0f, 85.0f);
+		graphics.DrawLine(540.0f, 0.0f, 540.0f, 85.0f);
 		//CenterRightOutline
-	graphics.DrawLine(690.0f, 85.0f, 840.0f, 85.0f);
-	graphics.DrawLine(690.0f, 0.0f, 690.0f, 85.0f);
-	graphics.DrawLine(840.0f, 0.0f, 840.0f, 85.0f);
+		graphics.DrawLine(690.0f, 85.0f, 840.0f, 85.0f);
+		graphics.DrawLine(690.0f, 0.0f, 690.0f, 85.0f);
+		graphics.DrawLine(840.0f, 0.0f, 840.0f, 85.0f);
 		//RightMostOutline
-	graphics.DrawLine(990.0f, 85.0f, 1140.0f, 85.0f);
-	graphics.DrawLine(990.0f, 0.0f, 990.0f, 85.0f);
-	graphics.DrawLine(1140.0f, 0.0f, 1140.0f, 85.0f);
+		graphics.DrawLine(990.0f, 85.0f, 1140.0f, 85.0f);
+		graphics.DrawLine(990.0f, 0.0f, 990.0f, 85.0f);
+		graphics.DrawLine(1140.0f, 0.0f, 1140.0f, 85.0f);
 
-	//FRONT AND WATERSIDE SAFEZONES
+		//FRONT AND WATERSIDE SAFEZONES
 		//Outline
-	graphics.DrawLine(0.0f, 254.0f, 1250.0f, 254.0f);
-		
-	graphics.SetColor(RGB(85, 107, 47));
-	for (i = 0; i < 85; i++)
-	{
-		graphics.DrawLine(0.0f, 255.0f + i, 1250.0f, 255.0f + i);
-		graphics.DrawLine(0.0f, 850.0f - i, 1250.0f, 850.0f - i);
-	}
-	
+		graphics.DrawLine(0.0f, 254.0f, 1250.0f, 254.0f);
+
+		graphics.SetColor(RGB(85, 107, 47));
+		for (i = 0; i < 85; i++)
+		{
+			graphics.DrawLine(0.0f, 255.0f + i, 1250.0f, 255.0f + i);
+			graphics.DrawLine(0.0f, 850.0f - i, 1250.0f, 850.0f - i);
+		}
+	//}
 }
 
 void myDraw(Core::Graphics & graphics)
@@ -405,10 +420,6 @@ void myDraw(Core::Graphics & graphics)
 	gameBackground(graphics);
 	frog.drawThyself(graphics);
 	car.drawthyself(graphics);
-<<<<<<< HEAD
-	
-=======
->>>>>>> origin/master
 }
 
 void main()
@@ -418,6 +429,5 @@ void main()
 	Core::RegisterDrawFn(myDraw);
 	Core::GameLoop();
 	
-
 }
 

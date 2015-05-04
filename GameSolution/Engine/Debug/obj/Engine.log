@@ -1,11 +1,11 @@
-﻿Build started 5/3/2015 10:25:22 PM.
-     1>Project "C:\dev\Quarter3\Frogger-Bo-Bogger\Frogger-Bo-Bogger\GameSolution\Engine\Engine.vcxproj" on node 2 (Build target(s)).
-     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(363,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
-     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(364,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+﻿Build started 5/4/2015 9:48:23 AM.
+     1>Project "C:\Users\Brady Groharing\Desktop\Frogger-Bo-Bogger\GameSolution\Engine\Engine.vcxproj" on node 2 (Build target(s)).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(356,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(357,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
      1>Link:
-         Engine.vcxproj -> C:\dev\Quarter3\Frogger-Bo-Bogger\Frogger-Bo-Bogger\GameSolution\Debug\Engine.dll
-     1>Done Building Project "C:\dev\Quarter3\Frogger-Bo-Bogger\Frogger-Bo-Bogger\GameSolution\Engine\Engine.vcxproj" (Build target(s)).
+         Engine.vcxproj -> C:\Users\Brady Groharing\Desktop\Frogger-Bo-Bogger\GameSolution\Debug\Engine.dll
+     1>Done Building Project "C:\Users\Brady Groharing\Desktop\Frogger-Bo-Bogger\GameSolution\Engine\Engine.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.24
+Time Elapsed 00:00:00.14
