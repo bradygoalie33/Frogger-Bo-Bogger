@@ -19,6 +19,23 @@ static bool gameStarting = true;
 static float frogX = 20;
 static float frogY = 20;
 
+static float car1X = 20;
+static float car1Y = 20;
+
+static float car2X = 20;
+static float car2Y = 20;
+
+static float car3X = 20;
+static float car3Y = 20;
+
+static float car4X = 20;
+static float car4Y = 20;
+
+static float car5X = 20;
+static float car5Y = 20;
+
+
+
 struct Point
 {
 	float x;
@@ -50,7 +67,7 @@ struct Car
 
 	Car() :
 
-		meBase(100,100),
+		meBase(car1X,car1Y),
 		topLeft(0,0),
 		topRight(10,0),
 		bottomLeft(0,10),
@@ -95,7 +112,7 @@ struct Car2
 	Point velocity;
 
 	Car2() :
-		meBase(100, 100),
+		meBase(car2X, car2Y),
 		topLeft(20, 20),
 		topRight(30, 20),
 		bottomLeft(20, 30),
@@ -140,7 +157,7 @@ struct Car3
 	Point velocity;
 
 	Car3() :
-		meBase(100, 100),
+		meBase(car3X, car3Y),
 		topLeft(70, 70),
 		topRight(80, 70),
 		bottomLeft(70, 80),
@@ -185,7 +202,7 @@ struct Car4
 	Point velocity;
 
 	Car4() :
-		meBase(100, 100),
+		meBase(car4X, car4Y),
 		topLeft(110, 110),
 		topRight(120, 110),
 		bottomLeft(110, 120),
@@ -230,7 +247,7 @@ struct Car5
 	Point velocity;
 
 	Car5() :
-		meBase(100, 100),
+		meBase(car5X, car5Y),
 		topLeft(400, 400),
 		topRight(410, 400),
 		bottomLeft(400, 410),
