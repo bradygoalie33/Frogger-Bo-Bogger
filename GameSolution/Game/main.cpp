@@ -34,7 +34,7 @@ void drawLine(Core::Graphics& g, const Point& left, const Point& right)
 	g.DrawLine(left.x, left.y, right.x, right.y);
 }
 
-struct car
+struct Car
 {
 	Point topLeft;
 	Point topRight;
@@ -45,8 +45,8 @@ struct car
 	Point velocity;
 
 
-	car(Point topleft, Point topright, Point bottomleft, Point bottomright){
-		meBase = (400, 400);
+	Car(Point topleft, Point topright, Point bottomleft, Point bottomright){
+		meBase = (100.0f, 100.0f);
 		topLeft = topleft;
 		topRight = topright;
 		bottomLeft = bottomleft;
@@ -54,16 +54,133 @@ struct car
 	}
 
 	void drawthyself(Core::Graphics& g){
-		g.SetColor(RGB(255, 0, 0));
-		drawLine(g, meBase + topLeft, meBase + topRight);
-		drawLine(g, meBase + topRight, meBase + bottomRight);
-		drawLine(g, meBase + bottomRight, meBase + bottomLeft);
-		drawLine(g, meBase + bottomLeft, meBase + topLeft);
+		int randInt = rand() % 4;
+		if (randInt == 0){
+			g.SetColor(RGB(255, 0, 0));
+		}
+		else if (randInt == 1){
+			g.SetColor(RGB(0, 0, 255));
+		}
+		else if (randInt == 2){
+			g.SetColor(RGB(0, 255, 0));
+		}
+		else{
+			g.SetColor(RGB(255, 255, 255));
+		}
+		
+		//drawLine(g, meBase + topLeft, meBase + topRight);
+		//drawLine(g, meBase + topRight, meBase + bottomRight);
+		//drawLine(g, meBase + bottomRight, meBase + bottomLeft);
+		//drawLine(g, meBase + bottomLeft, meBase + topLeft);
+
+		drawLine(g, topLeft, topRight);
+		drawLine(g, topRight, bottomRight);
+		drawLine(g, bottomRight, bottomLeft);
+		drawLine(g, bottomLeft, topLeft);
 	}
 	void integrate(){
 		meBase + velocity;
 	}
+
 };
+
+Car getRandCar(){
+	
+	int randInt = rand() % 5;
+
+	//BodyTopLeft(640, 720 + 70),
+	//	BodyTopRight(660, 720 + 70),
+	//	BodyBottomLeft(640, 755 + 70),
+	//	BodyBottomRight(660, 755 + 70)
+	//
+	//if (randInt == 0){
+	//	Point point1 = (150.0f, -150.0f);
+	//	Point point2 = (200.0f, -150.0f);
+	//	Point point3 = (200.0f, -200.0f);
+	//	Point point4 = (150.0f, -200.0f);
+	//	Car car1(point1, point2, point3, point4);
+	//	return car1;
+	//}
+	//else if (randInt == 1){
+	//	Point point1 = (150.0f, -150.0f);
+	//	Point point2 = (200.0f, -150.0f);
+	//	Point point3 = (200.0f, -200.0f);
+	//	Point point4 = (150.0f, -200.0f);
+	//	Car car2(point1, point2, point3, point4);
+	//	return car2;
+	//}
+	//else if (randInt == 2){
+	//	Point point1 = (150.0f, -150.0f);
+	//	Point point2 = (200.0f, -150.0f);
+	//	Point point3 = (200.0f, -200.0f);
+	//	Point point4 = (150.0f, -200.0f);
+	//	Car car3(point1, point2, point3, point4);
+	//	return car3;
+	//}
+	//else if (randInt == 3){
+	//	Point point1 = (150.0f, -150.0f);
+	//	Point point2 = (200.0f, -150.0f);
+	//	Point point3 = (200.0f, -200.0f);
+	//	Point point4 = (150.0f, -200.0f);
+	//	Car car4(point1, point2, point3, point4);
+	//	return car4;
+	//}
+	//else{
+	//	Point point1 = (150.0f, -150.0f);
+	//	Point point2 = (200.0f, -150.0f);
+	//	Point point3 = (200.0f, -200.0f);
+	//	Point point4 = (150.0f, -200.0f);
+	//	Car car5(point1, point2, point3, point4);
+	//	return car5;
+	//}
+
+	if (randInt == 0){
+		Point point1 = (640.0f, 720.0f + 70.0f);
+		Point point2 = (660.0f, 720.0f + 70.0f);
+		Point point3 = (640.0f, 755.0f + 70.0f);
+		Point point4 = (660.0f, 755.0f + 70.0f);
+		Car car1(point1, point2, point3, point4);
+		return car1;
+	}
+	else if (randInt == 1){
+		Point point1 = (640.0f, 720.0f + 70.0f);
+		Point point2 = (660.0f, 720.0f + 70.0f);
+		Point point3 = (640.0f, 755.0f + 70.0f);
+		Point point4 = (660.0f, 755.0f + 70.0f);
+		Car car2(point1, point2, point3, point4);
+		return car2;
+	}
+	else if (randInt == 2){
+		Point point1 = (640.0f, 720.0f + 70.0f);
+		Point point2 = (660.0f, 720.0f + 70.0f);
+		Point point3 = (640.0f, 755.0f + 70.0f);
+		Point point4 = (660.0f, 755.0f + 70.0f);
+		Car car3(point1, point2, point3, point4);
+		return car3;
+	}
+	else if (randInt == 3){
+		Point point1 = (640.0f, 720.0f + 70.0f);
+		Point point2 = (660.0f, 720.0f + 70.0f);
+		Point point3 = (640.0f, 755.0f + 70.0f);
+		Point point4 = (660.0f, 755.0f + 70.0f);
+		Car car4(point1, point2, point3, point4);
+		return car4;
+	}
+	else{
+		Point point1 = (640.0f, 720.0f + 70.0f);
+		Point point2 = (660.0f, 720.0f + 70.0f);
+		Point point3 = (640.0f, 755.0f + 70.0f);
+		Point point4 = (660.0f, 755.0f + 70.0f);
+		Car car5(point1, point2, point3, point4);
+		return car5;
+	}
+	
+
+	
+}
+
+Car car = getRandCar();
+
 
 struct Frog
 {
@@ -181,6 +298,7 @@ void checkKeyInput()
 bool myUpdate(float dt)
 {
 	frog.Integrate();
+	car.integrate();
 	checkKeyInput();
 	
 	return false;
@@ -258,6 +376,7 @@ void myDraw(Core::Graphics & graphics)
 {
 	gameBackground(graphics);
 	frog.drawThyself(graphics);
+	car.drawthyself(graphics);
 	
 }
 
@@ -267,5 +386,7 @@ void main()
 	Core::RegisterUpdateFn(myUpdate);
 	Core::RegisterDrawFn(myDraw);
 	Core::GameLoop();
+	
+
 }
 
