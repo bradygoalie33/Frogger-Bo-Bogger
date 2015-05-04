@@ -34,7 +34,7 @@ void drawLine(Core::Graphics& g, const Point& left, const Point& right)
 	g.DrawLine(left.x, left.y, right.x, right.y);
 }
 
-struct car
+struct Car
 {
 	Point topLeft;
 	Point topRight;
@@ -45,8 +45,8 @@ struct car
 	Point velocity;
 
 
-	car(Point topleft, Point topright, Point bottomleft, Point bottomright){
-		meBase = (400, 400);
+	Car(Point topleft, Point topright, Point bottomleft, Point bottomright){
+		meBase = (0, 0);
 		topLeft = topleft;
 		topRight = topright;
 		bottomLeft = bottomleft;
@@ -64,6 +64,8 @@ struct car
 		meBase + velocity;
 	}
 };
+
+Car car((300, 300), (200, 200), (100, 100), (0, 0));
 
 struct Frog
 {
@@ -243,8 +245,28 @@ void gameBackground(Core::Graphics& graphics)
 		graphics.DrawLine(690.0f, 85.0f + i, 840.0f, 85.0f + i);
 		graphics.DrawLine(990.0f, 85.0f + i, 1140.0f, 85.0f + i);
 	}
+		//LeftMostOutline
+	graphics.SetColor(RGB(0, 0, 0));
+	graphics.DrawLine(80.0f, 85.0f, 240.0f, 85.0f);
+	graphics.DrawLine(80.0f, 0.0f, 80.0f, 85.0f);
+	graphics.DrawLine(240.0f, 0.0f, 240.0f, 85.0f);
+		//CenterLeftOutline
+	graphics.DrawLine(390.0f, 85.0f, 540.0f, 85.0f);
+	graphics.DrawLine(390.0f, 0.0f, 390.0f, 85.0f);
+	graphics.DrawLine(540.0f, 0.0f, 540.0f, 85.0f);
+		//CenterRightOutline
+	graphics.DrawLine(690.0f, 85.0f, 840.0f, 85.0f);
+	graphics.DrawLine(690.0f, 0.0f, 690.0f, 85.0f);
+	graphics.DrawLine(840.0f, 0.0f, 840.0f, 85.0f);
+		//RightMostOutline
+	graphics.DrawLine(990.0f, 85.0f, 1140.0f, 85.0f);
+	graphics.DrawLine(990.0f, 0.0f, 990.0f, 85.0f);
+	graphics.DrawLine(1140.0f, 0.0f, 1140.0f, 85.0f);
 
-	//Front and WaterSide Safezones
+	//FRONT AND WATERSIDE SAFEZONES
+		//Outline
+	graphics.DrawLine(0.0f, 254.0f, 1250.0f, 254.0f);
+		
 	graphics.SetColor(RGB(85, 107, 47));
 	for (i = 0; i < 85; i++)
 	{
@@ -258,7 +280,7 @@ void myDraw(Core::Graphics & graphics)
 {
 	gameBackground(graphics);
 	frog.drawThyself(graphics);
-	
+	car.drawthyself(graphics);
 }
 
 void main()
