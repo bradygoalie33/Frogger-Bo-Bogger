@@ -68,10 +68,10 @@ struct Car
 	Car() :
 
 		meBase(car1X,car1Y),
-		topLeft(0,0),
-		topRight(10,0),
-		bottomLeft(0,10),
-		bottomRight(10,10)	
+		topLeft(400,690),
+		topRight(490, 690),
+		bottomLeft(400,730),
+		bottomRight(490, 730)
 			
 		{}				  
 
@@ -113,10 +113,10 @@ struct Car2
 
 	Car2() :
 		meBase(car2X, car2Y),
-		topLeft(20, 20),
-		topRight(30, 20),
-		bottomLeft(20, 30),
-		bottomRight(30, 30)
+		topLeft(400, 600),
+		topRight(490, 600),
+		bottomLeft(400, 640),
+		bottomRight(490, 640)
 
 	{}
 
@@ -158,10 +158,10 @@ struct Car3
 
 	Car3() :
 		meBase(car3X, car3Y),
-		topLeft(70, 70),
-		topRight(80, 70),
-		bottomLeft(70, 80),
-		bottomRight(80, 80)
+		topLeft(400, 510),
+		topRight(490, 510),
+		bottomLeft(400, 550),
+		bottomRight(490, 550)
 
 	{}
 
@@ -203,10 +203,10 @@ struct Car4
 
 	Car4() :
 		meBase(car4X, car4Y),
-		topLeft(110, 110),
-		topRight(120, 110),
-		bottomLeft(110, 120),
-		bottomRight(120, 120)
+		topLeft(400, 430),
+		topRight(490, 430),
+		bottomLeft(400, 470),
+		bottomRight(490, 470)
 
 	{}
 
@@ -248,10 +248,10 @@ struct Car5
 
 	Car5() :
 		meBase(car5X, car5Y),
-		topLeft(400, 400),
-		topRight(410, 400),
-		bottomLeft(400, 410),
-		bottomRight(410, 410)
+		topLeft(400, 340),
+		topRight(490, 340),
+		bottomLeft(400, 380),
+		bottomRight(490, 380)
 
 	{}
 
