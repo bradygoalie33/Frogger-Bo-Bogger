@@ -19,6 +19,8 @@ static bool gameStarting = true;
 static float frogX = 20;
 static float frogY = 20;
 
+static float cursorY = 525;
+
 static float car1X = 20;
 static float car1Y = 20;
 static bool car1MoveRight = true;
@@ -69,16 +71,19 @@ struct Car
 	
 	Point meBase;
 	Point velocity;
+	float startingPoint;
 
-	Car() :
+	Car(float startPoint) :
 
 		meBase(car1X,car1Y),
-		topLeft(1000,690),
-		topRight(1090, 690),
-		bottomLeft(1000,730),
-		bottomRight(1090, 730)
+		topLeft(1100 + startPoint,690),
+		topRight(1190 + startPoint, 690),
+		bottomLeft(1100 + startPoint, 730),
+		bottomRight(1190 + startPoint, 730)
 			
-		{}				  
+	{
+		startingPoint = startPoint;
+	}
 
 	void drawthyself(Core::Graphics& g){
 		int randInt = rand() % 4;
@@ -101,16 +106,15 @@ struct Car
 		drawLine(g, meBase + bottomLeft, meBase + topLeft);
 	}
 	void integrate(){
-		if (meBase.x + topLeft.x <= 800)
+		if (meBase.x + topLeft.x <= -100 - startingPoint)
 		{
-			car4X = 20;
-			car4Y = 20;
-			meBase.x = car4X;
-			meBase.y = car4Y;
+			
+			meBase.x = 20;
+			meBase.y = 20;
 
 		}
 		else{
-			meBase.x--;
+			meBase.x -= 8;
 
 		}
 	}
@@ -157,7 +161,7 @@ struct Car2
 		drawLine(g, meBase + bottomLeft, meBase + topLeft);
 	}
 	void integrate(){
-		if (meBase.x + topRight.x >= 200)
+		if (meBase.x + topRight.x >= 1400)
 		{
 			car2X = 20;
 			car2Y = 20;
@@ -166,7 +170,7 @@ struct Car2
 
 		}
 		else{
-			meBase.x++;
+			meBase.x += 8;
 
 		}
 	}
@@ -183,14 +187,19 @@ struct Car3
 	Point meBase;
 	Point velocity;
 
-	Car3() :
-		meBase(car3X, car3Y),
-		topLeft(0, 510),
-		topRight(90, 510),
-		bottomLeft(0, 550),
-		bottomRight(90, 550)
+	float startingPoint;
 
-	{}
+	Car3(float startPoint) :
+
+		meBase(car3X, car3Y),
+		topLeft(0 -startPoint, 510),
+		topRight(90 - startPoint, 510),
+		bottomLeft(0 - startPoint, 550),
+		bottomRight(90 - startPoint, 550)
+
+	{
+		startingPoint = startPoint;
+	}
 
 	void drawthyself(Core::Graphics& g){
 		int randInt = rand() % 4;
@@ -213,16 +222,15 @@ struct Car3
 		drawLine(g, meBase + bottomLeft, meBase + topLeft);
 	}
 	void integrate(){
-		if (meBase.x + topRight.x >= 200)
+		if (meBase.x + topRight.x >= 1600-startingPoint)
 		{
-			car3X = 20;
-			car3Y = 20;
-			meBase.x = car3X;
-			meBase.y = car3Y;
+			
+			meBase.x = 20;
+			meBase.y = 20;
 
 		}
 		else{
-			meBase.x++;
+			meBase.x += 5;
 
 		}
 	}
@@ -269,7 +277,7 @@ struct Car4
 		drawLine(g, meBase + bottomLeft, meBase + topLeft);
 	}
 	void integrate(){
-		if (meBase.x + topLeft.x <= 800)
+		if (meBase.x + topLeft.x <= -200)
 		{
 			car4X = 20;
 			car4Y = 20;
@@ -278,7 +286,7 @@ struct Car4
 
 		}
 		else{
-			meBase.x--;
+			meBase.x -= 10;
 
 		}
 	}
@@ -327,7 +335,7 @@ struct Car5
 	}
 	void integrate(){
 
-		if (meBase.x + topRight.x >= 200)
+		if (meBase.x + topRight.x >= 1400)
 		{
 			car5X = 20;
 			car5Y = 20;
@@ -336,7 +344,7 @@ struct Car5
 			
 		}
 		else{
-			meBase.x++;
+			meBase.x += 10;
 			
 		}
 		/*
@@ -363,10 +371,12 @@ struct Car5
 
 };
 
-Car car;
+Car car(0.0f);
+Car car1(200.0f);
 Car2 car2;
-
-Car3 car3;
+Car3 car3(0.0f);
+Car3 car3two(150.0f);
+Car3 car3three(300.0f);
 Car4 car4;
 Car5 car5;
 
@@ -447,7 +457,7 @@ Frog frog;
 
 void checkKeyInput()
 {
-	//if (gameState == Playing){
+	if (gameState == Playing){
 		float vAcceleration = 85;
 		float hAcceleration = 75;
 		Point jumpX(10, 0);
@@ -483,7 +493,7 @@ void checkKeyInput()
 		}
 		else if (!Core::Input::IsPressed(Core::Input::KEY_LEFT) && moveLeft == true)
 			moveLeft = false;
-	//}
+	}
 }
 
 void gameLogic()
@@ -493,14 +503,20 @@ void gameLogic()
 
 bool myUpdate(float dt)
 {
-	frog.Integrate();
-	car.integrate();
-	car2.integrate();
-	car3.integrate();
-	car4.integrate();
-	car5.integrate();
+	if (gameState == Playing)
+	{
+		frog.Integrate();
+		car.integrate();
+		car1.integrate();
+		car2.integrate();
+		car3.integrate();
+		car3two.integrate();
+		car3three.integrate();
+		car4.integrate();
+		car5.integrate();
+		gameLogic();
+	}
 	checkKeyInput();
-	gameLogic();
 	return false;
 }
 
@@ -512,10 +528,10 @@ void gameBackground(Core::Graphics& graphics)
 		graphics.DrawString(1110/2, 850/2, "IT'S FROGGER");
 		graphics.DrawString(1110 / 2, 900 / 2, "NEW GAME");
 		graphics.DrawString(1110 / 2, 950 / 2, "I'M OUT");
-		Ellipse(graphics.memDC, 650, 675, 625, 650);
+		Ellipse(graphics.memDC, 530, 500, 540, 490);
 	}
 	
-	//else if (gameState == Playing){
+	else if (gameState == Playing){
 		int i;
 		int k;
 
@@ -600,19 +616,25 @@ void gameBackground(Core::Graphics& graphics)
 			graphics.DrawLine(0.0f, 255.0f + i, 1250.0f, 255.0f + i);
 			graphics.DrawLine(0.0f, 850.0f - i, 1250.0f, 850.0f - i);
 		}
-	//}
+	}
 }
 
 void myDraw(Core::Graphics & graphics)
 {
 	gameBackground(graphics);
-	frog.drawThyself(graphics);
-	car.drawthyself(graphics);
-	car2.drawthyself(graphics);
-	car3.drawthyself(graphics);
-	car4.drawthyself(graphics);
-	car5.drawthyself(graphics);
 
+	if (gameState == Playing)
+	{	
+		frog.drawThyself(graphics);
+		car.drawthyself(graphics);
+		car1.drawthyself(graphics);
+		car2.drawthyself(graphics);
+		car3.drawthyself(graphics);
+		car3two.drawthyself(graphics);
+		car3three.drawthyself(graphics);
+		car4.drawthyself(graphics);
+		car5.drawthyself(graphics);
+	}
 }
 
 void main()
