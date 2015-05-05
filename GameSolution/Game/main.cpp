@@ -10,6 +10,7 @@ int baseY = 2;
 
 enum gameStates { Menu, GameOver, Paused, Playing };
 static gameStates gameState = Menu;
+static bool hitCar = false;
 static bool moveUp = false;
 static bool moveDown = false;
 static bool moveLeft = false;
@@ -494,6 +495,48 @@ void checkKeyInput()
 		else if (!Core::Input::IsPressed(Core::Input::KEY_LEFT) && moveLeft == true)
 			moveLeft = false;
 	}
+}
+
+bool collisionLogic()
+{
+
+	if (frog.BodyBottomRight.y >= car.bottomLeft.y && frog.BodyBottomRight.y <= car.topLeft.y){
+		if (frog.BodyBottomRight.x >= car.bottomLeft.x && frog.BodyBottomRight.x <= car.topLeft.x){
+			hitCar = true;
+		}
+	}
+	else if (frog.BodyBottomRight.y >= car1.bottomLeft.y && frog.BodyBottomRight.y <= car1.topLeft.y){
+		if (frog.BodyBottomRight.x >= car1.bottomLeft.x && frog.BodyBottomRight.x <= car1.topLeft.x){
+			hitCar = true;
+		}
+	}
+
+	else if (frog.BodyBottomRight.y >= car2.bottomLeft.y && frog.BodyBottomRight.y <= car2.topLeft.y){
+		if (frog.BodyBottomRight.x >= car2.bottomLeft.x && frog.BodyBottomRight.x <= car2.topLeft.x){
+			hitCar = true;
+		}
+	}
+
+	else if (frog.BodyBottomRight.y >= car3.bottomLeft.y && frog.BodyBottomRight.y <= car3.topLeft.y){
+		if (frog.BodyBottomRight.x >= car3three.bottomLeft.x && frog.BodyBottomRight.x <= car3.topLeft.x){
+			hitCar = true;
+		}
+	}
+
+	else if (frog.BodyBottomRight.y >= car4.bottomLeft.y && frog.BodyBottomRight.y <= car4.topLeft.y){
+		if (frog.BodyBottomRight.x >= car4.bottomLeft.x && frog.BodyBottomRight.x <= car4.topLeft.x){
+			hitCar = true;
+		}
+	}
+	else if (frog.BodyBottomRight.y >= car5.bottomLeft.y && frog.BodyBottomRight.y <= car5.topLeft.y){
+		if (frog.BodyBottomRight.x >= car5.bottomLeft.x && frog.BodyBottomRight.x <= car5.topLeft.x){
+			hitCar = true;
+		}
+	}
+
+	return hitCar;
+
+
 }
 
 void gameLogic()
