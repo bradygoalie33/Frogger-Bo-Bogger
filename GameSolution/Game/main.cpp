@@ -21,18 +21,23 @@ static float frogY = 20;
 
 static float car1X = 20;
 static float car1Y = 20;
+static bool car1MoveRight = true;
 
 static float car2X = 20;
 static float car2Y = 20;
+static bool car2MoveRight = true;
 
 static float car3X = 20;
 static float car3Y = 20;
+static bool car3MoveRight = true;
 
 static float car4X = 20;
 static float car4Y = 20;
+static bool car4MoveRight = true;
 
 static float car5X = 20;
 static float car5Y = 20;
+static bool car5MoveRight = true;
 
 
 
@@ -68,10 +73,10 @@ struct Car
 	Car() :
 
 		meBase(car1X,car1Y),
-		topLeft(400,690),
-		topRight(490, 690),
-		bottomLeft(400,730),
-		bottomRight(490, 730)
+		topLeft(1000,690),
+		topRight(1090, 690),
+		bottomLeft(1000,730),
+		bottomRight(1090, 730)
 			
 		{}				  
 
@@ -96,7 +101,18 @@ struct Car
 		drawLine(g, meBase + bottomLeft, meBase + topLeft);
 	}
 	void integrate(){
-		meBase + velocity;
+		if (meBase.x + topLeft.x <= 800)
+		{
+			car4X = 20;
+			car4Y = 20;
+			meBase.x = car4X;
+			meBase.y = car4Y;
+
+		}
+		else{
+			meBase.x--;
+
+		}
 	}
 
 };
@@ -113,10 +129,10 @@ struct Car2
 
 	Car2() :
 		meBase(car2X, car2Y),
-		topLeft(400, 600),
-		topRight(490, 600),
-		bottomLeft(400, 640),
-		bottomRight(490, 640)
+		topLeft(0, 600),
+		topRight(90, 600),
+		bottomLeft(0, 640),
+		bottomRight(90, 640)
 
 	{}
 
@@ -141,7 +157,18 @@ struct Car2
 		drawLine(g, meBase + bottomLeft, meBase + topLeft);
 	}
 	void integrate(){
-		meBase + velocity;
+		if (meBase.x + topRight.x >= 200)
+		{
+			car2X = 20;
+			car2Y = 20;
+			meBase.x = car2X;
+			meBase.y = car2Y;
+
+		}
+		else{
+			meBase.x++;
+
+		}
 	}
 
 };
@@ -158,10 +185,10 @@ struct Car3
 
 	Car3() :
 		meBase(car3X, car3Y),
-		topLeft(400, 510),
-		topRight(490, 510),
-		bottomLeft(400, 550),
-		bottomRight(490, 550)
+		topLeft(0, 510),
+		topRight(90, 510),
+		bottomLeft(0, 550),
+		bottomRight(90, 550)
 
 	{}
 
@@ -186,7 +213,18 @@ struct Car3
 		drawLine(g, meBase + bottomLeft, meBase + topLeft);
 	}
 	void integrate(){
-		meBase + velocity;
+		if (meBase.x + topRight.x >= 200)
+		{
+			car3X = 20;
+			car3Y = 20;
+			meBase.x = car3X;
+			meBase.y = car3Y;
+
+		}
+		else{
+			meBase.x++;
+
+		}
 	}
 
 };
@@ -203,10 +241,10 @@ struct Car4
 
 	Car4() :
 		meBase(car4X, car4Y),
-		topLeft(400, 430),
-		topRight(490, 430),
-		bottomLeft(400, 470),
-		bottomRight(490, 470)
+		topLeft(1000, 430),
+		topRight(1150, 430),
+		bottomLeft(1000, 470),
+		bottomRight(1150, 470)
 
 	{}
 
@@ -231,7 +269,18 @@ struct Car4
 		drawLine(g, meBase + bottomLeft, meBase + topLeft);
 	}
 	void integrate(){
-		meBase + velocity;
+		if (meBase.x + topLeft.x <= 800)
+		{
+			car4X = 20;
+			car4Y = 20;
+			meBase.x = car4X;
+			meBase.y = car4Y;
+
+		}
+		else{
+			meBase.x--;
+
+		}
 	}
 
 };
@@ -248,10 +297,10 @@ struct Car5
 
 	Car5() :
 		meBase(car5X, car5Y),
-		topLeft(400, 340),
-		topRight(490, 340),
-		bottomLeft(400, 380),
-		bottomRight(490, 380)
+		topLeft(0, 340),
+		topRight(120, 340),
+		bottomLeft(0, 380),
+		bottomRight(120, 380)
 
 	{}
 
@@ -274,15 +323,49 @@ struct Car5
 		drawLine(g, meBase + topRight, meBase + bottomRight);
 		drawLine(g, meBase + bottomRight, meBase + bottomLeft);
 		drawLine(g, meBase + bottomLeft, meBase + topLeft);
+		
 	}
 	void integrate(){
-		meBase + velocity;
+
+		if (meBase.x + topRight.x >= 200)
+		{
+			car5X = 20;
+			car5Y = 20;
+			meBase.x = car5X;
+			meBase.y = car5Y;
+			
+		}
+		else{
+			meBase.x++;
+			
+		}
+		/*
+		if (meBase.x <= -150 || meBase.x >= 200)
+		{	
+			car5MoveRight = !car5MoveRight;
+
+			if (car5MoveRight == true && meBase.x <= -150)
+				meBase.x += 3;
+			else if (car5MoveRight == false && meBase.x >= 200)
+				meBase.x -= 3;
+		}
+		
+		else if (meBase.x >= -150 || meBase.x <= 200)
+		{
+			if (car5MoveRight == true)
+				meBase.x += 10;
+			else if (car5MoveRight == false)
+				meBase.x -=10;
+		}
+		*/
+			
 	}
 
 };
 
 Car car;
 Car2 car2;
+
 Car3 car3;
 Car4 car4;
 Car5 car5;
@@ -412,6 +495,10 @@ bool myUpdate(float dt)
 {
 	frog.Integrate();
 	car.integrate();
+	car2.integrate();
+	car3.integrate();
+	car4.integrate();
+	car5.integrate();
 	checkKeyInput();
 	gameLogic();
 	return false;
