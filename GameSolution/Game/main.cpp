@@ -506,13 +506,13 @@ bool collisionLogic()
 		}
 	}
 	else if (frog.BodyBottomRight.y >= car1.bottomLeft.y && frog.BodyBottomRight.y <= car1.topLeft.y){
-		if (frog.BodyBottomRight.x >= car1.bottomLeft.x && frog.BodyBottomRight.x <= car1.topLeft.x){
+		if (frog.BodyBottomRight.x <= car1.bottomLeft.x && frog.BodyBottomRight.x >= car1.topLeft.x){
 			hitCar = true;
 		}
 	}
 
 	else if (frog.BodyBottomRight.y >= car2.bottomLeft.y && frog.BodyBottomRight.y <= car2.topLeft.y){
-		if (frog.BodyBottomRight.x >= car2.bottomLeft.x && frog.BodyBottomRight.x <= car2.topLeft.x){
+		if (frog.BodyBottomRight.x <= car2.bottomLeft.x && frog.BodyBottomRight.x >= car2.topLeft.x){
 			hitCar = true;
 		}
 	}
@@ -524,7 +524,7 @@ bool collisionLogic()
 	}
 
 	else if (frog.BodyBottomRight.y >= car4.bottomLeft.y && frog.BodyBottomRight.y <= car4.topLeft.y){
-		if (frog.BodyBottomRight.x >= car4.bottomLeft.x && frog.BodyBottomRight.x <= car4.topLeft.x){
+		if (frog.BodyBottomRight.x <= car4.bottomLeft.x && frog.BodyBottomRight.x >= car4.topLeft.x){
 			hitCar = true;
 		}
 	}
