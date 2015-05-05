@@ -21,23 +21,18 @@ static float frogY = 20;
 
 static float car1X = 20;
 static float car1Y = 20;
-static bool car1MoveRight = true;
 
 static float car2X = 20;
 static float car2Y = 20;
-static bool car2MoveRight = true;
 
 static float car3X = 20;
 static float car3Y = 20;
-static bool car3MoveRight = true;
 
 static float car4X = 20;
 static float car4Y = 20;
-static bool car4MoveRight = true;
 
 static float car5X = 20;
 static float car5Y = 20;
-static bool car5MoveRight = true;
 
 
 
@@ -279,29 +274,9 @@ struct Car5
 		drawLine(g, meBase + topRight, meBase + bottomRight);
 		drawLine(g, meBase + bottomRight, meBase + bottomLeft);
 		drawLine(g, meBase + bottomLeft, meBase + topLeft);
-		
 	}
 	void integrate(){
-
-		if (meBase.x <= -150 || meBase.x >= 200)
-		{	
-			car5MoveRight = !car5MoveRight;
-
-			if (car5MoveRight == true && meBase.x <= -150)
-				meBase.x += 3;
-			else if (car5MoveRight == false && meBase.x >= 200)
-				meBase.x -= 3;
-		}
-		
-		else if (meBase.x >= -150 || meBase.x <= 200)
-		{
-			if (car5MoveRight == true)
-				meBase.x += 10;
-			else if (car5MoveRight == false)
-				meBase.x -=10;
-		}
-		
-			
+		meBase + velocity;
 	}
 
 };
@@ -437,7 +412,6 @@ bool myUpdate(float dt)
 {
 	frog.Integrate();
 	car.integrate();
-	car5.integrate();
 	checkKeyInput();
 	gameLogic();
 	return false;
