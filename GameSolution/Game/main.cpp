@@ -10,6 +10,7 @@ int baseY = 2;
 
 enum gameStates { Menu, GameOver, Paused, Playing };
 static gameStates gameState = Playing;
+static bool hitCar = false;
 static bool moveUp = false;
 static bool moveDown = false;
 static bool moveLeft = false;
@@ -114,10 +115,10 @@ struct Car
 			bottomRight.x = 1190 + startingPoint;
 		}
 		else{
-			topLeft.x -= 18;
-			topRight.x -= 18;
-			bottomLeft.x -= 18;
-			bottomRight.x -= 18;
+			topLeft.x -= 1;
+			topRight.x -= 1;
+			bottomLeft.x -= 1;
+			bottomRight.x -= 1;
 
 		}
 	}
@@ -489,15 +490,18 @@ void checkKeyInput()
 	}
 }
 
-void collisionLogic()
+bool collisionLogic()
 {
+	//cout << "car " << car.topLeft.x << endl;
+	//cout << "frog " << frog.rightUpLegLower.x + frog.meBase.x << endl;
+
 	if (frog.meBase.y == -85){
 		if (frog.rightUpLegLower.x >= car.topLeft.x && frog.rightUpLegLower.x <= car.topRight.x){
-			gameState = GameOver;
+			hitCar = true;
 			cout << "shit" << endl;
 		}
 		else if (frog.rightUpLegLower.x >= car1.bottomLeft.x && frog.rightUpLegLower.x <= car1.topRight.x){
-			gameState = GameOver;
+			hitCar = true;
 			cout << "shit snax" << endl;
 		}
 		
@@ -505,30 +509,32 @@ void collisionLogic()
 
 	else if (frog.meBase.y == -170){
 		if (frog.leftUpLegLower.x >= car2.bottomLeft.x && frog.leftUpLegLower.x <= car2.topRight.x){
-			gameState = GameOver;
+			hitCar = true;
 			cout << "shit snax2" << endl;
 		}
 	}
 
 	else if (frog.meBase.y == -255){
 		if (frog.leftUpLegLower.x >= car3three.bottomLeft.x && frog.leftUpLegLower.x <= car3.topRight.x){
-			gameState = GameOver;
+			hitCar = true;
 			cout << "shit snax3" << endl;
 		}
 	}
 
 	else if (frog.meBase.y == -340){
 		if (frog.rightUpLegLower.x >= car4.bottomLeft.x && frog.rightUpLegLower.x <= car4.topRight.x){
-			gameState = GameOver;
+			hitCar = true;
 			cout << "shit snax4" << endl;
 		}
 	}
 	else if (frog.meBase.y == -425){
 		if (frog.leftUpLegLower.x >= car5.bottomLeft.x && frog.leftUpLegLower.x <= car5.topRight.x){
-			gameState = GameOver;
+			hitCar = true;
 			cout << "shit snax5" << endl;
 		}
 	}
+	
+	return hitCar;
 	
 
 }
