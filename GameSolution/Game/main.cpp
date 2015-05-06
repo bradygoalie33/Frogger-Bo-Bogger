@@ -496,42 +496,44 @@ bool collisionLogic()
 	//cout << "frog " << frog.rightUpLegLower.x + frog.meBase.x << endl;
 
 	if (frog.meBase.y == -85){
-		if (frog.leftUpLegLower.x >= car.topLeft.x && frog.leftUpLegLower.x <= car.topRight.x){
+		if (frog.rightUpLegLower.x >= car.topLeft.x && frog.rightUpLegLower.x <= car.topRight.x){
 			hitCar = true;
 			cout << "shit" << endl;
 		}
+		else if (frog.rightUpLegLower.x >= car1.bottomLeft.x && frog.rightUpLegLower.x <= car1.topRight.x){
+			hitCar = true;
+			cout << "shit snax" << endl;
+		}
 		
 	}
-	/*
-	else if (frog.BodyBottomRight.y >= car1.bottomLeft.y && frog.BodyBottomRight.y <= car1.topLeft.y){
-		if (frog.BodyBottomRight.x <= car1.bottomLeft.x && frog.BodyBottomRight.x >= car1.topLeft.x){
+
+	else if (frog.meBase.y == -170){
+		if (frog.leftUpLegLower.x >= car2.bottomLeft.x && frog.leftUpLegLower.x <= car2.topRight.x){
 			hitCar = true;
+			cout << "shit snax2" << endl;
 		}
 	}
 
-	else if (frog.BodyBottomRight.y >= car2.bottomLeft.y && frog.BodyBottomRight.y <= car2.topLeft.y){
-		if (frog.BodyBottomRight.x <= car2.bottomLeft.x && frog.BodyBottomRight.x >= car2.topLeft.x){
+	else if (frog.meBase.y == -255){
+		if (frog.leftUpLegLower.x >= car3three.bottomLeft.x && frog.leftUpLegLower.x <= car3.topRight.x){
 			hitCar = true;
+			cout << "shit snax3" << endl;
 		}
 	}
 
-	else if (frog.BodyBottomRight.y >= car3.bottomLeft.y && frog.BodyBottomRight.y <= car3.topLeft.y){
-		if (frog.BodyBottomRight.x >= car3three.bottomLeft.x && frog.BodyBottomRight.x <= car3.topLeft.x){
+	else if (frog.meBase.y == -340){
+		if (frog.rightUpLegLower.x >= car4.bottomLeft.x && frog.rightUpLegLower.x <= car4.topRight.x){
 			hitCar = true;
+			cout << "shit snax4" << endl;
 		}
 	}
-
-	else if (frog.BodyBottomRight.y >= car4.bottomLeft.y && frog.BodyBottomRight.y <= car4.topLeft.y){
-		if (frog.BodyBottomRight.x <= car4.bottomLeft.x && frog.BodyBottomRight.x >= car4.topLeft.x){
+	else if (frog.meBase.y == -425){
+		if (frog.leftUpLegLower.x >= car5.bottomLeft.x && frog.leftUpLegLower.x <= car5.topRight.x){
 			hitCar = true;
+			cout << "shit snax5" << endl;
 		}
 	}
-	else if (frog.BodyBottomRight.y >= car5.bottomLeft.y && frog.BodyBottomRight.y <= car5.topLeft.y){
-		if (frog.BodyBottomRight.x >= car5.bottomLeft.x && frog.BodyBottomRight.x <= car5.topLeft.x){
-			hitCar = true;
-		}
-	}
-	*/
+	
 	return hitCar;
 	
 
