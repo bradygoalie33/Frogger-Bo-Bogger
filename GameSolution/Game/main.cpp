@@ -9,7 +9,7 @@ int baseX = 0;
 int baseY = 2;
 
 enum gameStates { Menu, GameOver, Paused, Playing };
-static gameStates gameState = Menu;
+static gameStates gameState = Playing;
 static bool hitCar = false;
 static bool moveUp = false;
 static bool moveDown = false;
@@ -17,8 +17,8 @@ static bool moveLeft = false;
 static bool moveRight = false;
 static bool gameStarting = true;
 
-static float frogX = 20;
-static float frogY = 20;
+static float frogX = 0;
+static float frogY = 0;
 
 static float cursorY = 525;
 
@@ -76,8 +76,8 @@ struct Car
 
 	Car(float startPoint) :
 
-		meBase(car1X,car1Y),
-		topLeft(1100 + startPoint,690),
+		
+		topLeft(1100 + startPoint, 690),
 		topRight(1190 + startPoint, 690),
 		bottomLeft(1100 + startPoint, 730),
 		bottomRight(1190 + startPoint, 730)
@@ -101,21 +101,24 @@ struct Car
 			g.SetColor(RGB(255, 255, 255));
 		}
 
-		drawLine(g, meBase + topLeft, meBase + topRight);
-		drawLine(g, meBase + topRight, meBase + bottomRight);
-		drawLine(g, meBase + bottomRight, meBase + bottomLeft);
-		drawLine(g, meBase + bottomLeft, meBase + topLeft);
+		drawLine(g, topLeft, topRight);
+		drawLine(g, topRight,  bottomRight);
+		drawLine(g, bottomRight, bottomLeft);
+		drawLine(g, bottomLeft, topLeft);
 	}
 	void integrate(){
-		if (meBase.x + topLeft.x <= -100 - startingPoint)
-		{
-			
-			meBase.x = 20;
-			meBase.y = 20;
-
+		if (topLeft.x <= -100 + startingPoint)
+		{		
+			topLeft.x = 1100 + startingPoint;
+			topRight.x = 1190 + startingPoint;
+			bottomLeft.x = 1100 + startingPoint;
+			bottomRight.x = 1190 + startingPoint;
 		}
 		else{
-			meBase.x -= 8;
+			topLeft.x -= 1;
+			topRight.x -= 1;
+			bottomLeft.x -= 1;
+			bottomRight.x -= 1;
 
 		}
 	}
@@ -162,16 +165,18 @@ struct Car2
 		drawLine(g, meBase + bottomLeft, meBase + topLeft);
 	}
 	void integrate(){
-		if (meBase.x + topRight.x >= 1400)
+		if (topRight.x >= 1400)
 		{
-			car2X = 20;
-			car2Y = 20;
-			meBase.x = car2X;
-			meBase.y = car2Y;
-
+			topLeft.x = 0;
+			topRight.x = 90;
+			bottomLeft.x = 0;
+			bottomRight.x = 90;
 		}
 		else{
-			meBase.x += 8;
+			topLeft.x += 18;
+			topRight.x += 18;
+			bottomLeft.x += 18;
+			bottomRight.x += 18;
 
 		}
 	}
@@ -223,15 +228,18 @@ struct Car3
 		drawLine(g, meBase + bottomLeft, meBase + topLeft);
 	}
 	void integrate(){
-		if (meBase.x + topRight.x >= 1600-startingPoint)
+		if (topRight.x >= 1600-startingPoint)
 		{
-			
-			meBase.x = 20;
-			meBase.y = 20;
-
+			topLeft.x = 0 - startingPoint;
+			topRight.x = 90 - startingPoint;
+			bottomLeft.x = 0 - startingPoint;
+			bottomRight.x = 90 - startingPoint;
 		}
 		else{
-			meBase.x += 5;
+			topLeft.x += 18;
+			topRight.x += 18;
+			bottomLeft.x += 18;
+			bottomRight.x += 18;
 
 		}
 	}
@@ -278,16 +286,18 @@ struct Car4
 		drawLine(g, meBase + bottomLeft, meBase + topLeft);
 	}
 	void integrate(){
-		if (meBase.x + topLeft.x <= -200)
+		if (topLeft.x <= -200)
 		{
-			car4X = 20;
-			car4Y = 20;
-			meBase.x = car4X;
-			meBase.y = car4Y;
-
+			topLeft.x = 1000;
+			topRight.x = 1150;
+			bottomLeft.x = 1000;
+			bottomRight.x = 1150;
 		}
 		else{
-			meBase.x -= 10;
+			topLeft.x -= 18;
+			topRight.x -= 18;
+			bottomLeft.x -= 18;
+			bottomRight.x -= 18;
 
 		}
 	}
@@ -338,35 +348,18 @@ struct Car5
 
 		if (meBase.x + topRight.x >= 1400)
 		{
-			car5X = 20;
-			car5Y = 20;
-			meBase.x = car5X;
-			meBase.y = car5Y;
-			
+			topLeft.x = 0;
+			topRight.x = 120;
+			bottomLeft.x = 0;
+			bottomRight.x = 120;
 		}
 		else{
-			meBase.x += 10;
-			
-		}
-		/*
-		if (meBase.x <= -150 || meBase.x >= 200)
-		{	
-			car5MoveRight = !car5MoveRight;
+			topLeft.x += 18;
+			topRight.x += 18;
+			bottomLeft.x += 18;
+			bottomRight.x += 18;
 
-			if (car5MoveRight == true && meBase.x <= -150)
-				meBase.x += 3;
-			else if (car5MoveRight == false && meBase.x >= 200)
-				meBase.x -= 3;
 		}
-		
-		else if (meBase.x >= -150 || meBase.x <= 200)
-		{
-			if (car5MoveRight == true)
-				meBase.x += 10;
-			else if (car5MoveRight == false)
-				meBase.x -=10;
-		}
-		*/
 			
 	}
 
@@ -499,12 +492,17 @@ void checkKeyInput()
 
 bool collisionLogic()
 {
+	//cout << "car " << car.topLeft.x << endl;
+	//cout << "frog " << frog.rightUpLegLower.x + frog.meBase.x << endl;
 
-	if (frog.BodyBottomRight.y >= car.bottomLeft.y && frog.BodyBottomRight.y <= car.topLeft.y){
-		if (frog.BodyBottomRight.x >= car.bottomLeft.x && frog.BodyBottomRight.x <= car.topLeft.x){
+	if (frog.meBase.y == -85){
+		if (frog.leftUpLegLower.x >= car.topLeft.x && frog.leftUpLegLower.x <= car.topRight.x){
 			hitCar = true;
+			cout << "shit" << endl;
 		}
+		
 	}
+	/*
 	else if (frog.BodyBottomRight.y >= car1.bottomLeft.y && frog.BodyBottomRight.y <= car1.topLeft.y){
 		if (frog.BodyBottomRight.x <= car1.bottomLeft.x && frog.BodyBottomRight.x >= car1.topLeft.x){
 			hitCar = true;
@@ -533,9 +531,9 @@ bool collisionLogic()
 			hitCar = true;
 		}
 	}
-
+	*/
 	return hitCar;
-
+	
 
 }
 
@@ -558,8 +556,10 @@ bool myUpdate(float dt)
 		car4.integrate();
 		car5.integrate();
 		gameLogic();
+		collisionLogic();
 	}
 	checkKeyInput();
+
 	return false;
 }
 
@@ -682,6 +682,7 @@ void myDraw(Core::Graphics & graphics)
 
 void main()
 {
+
 	Core::Init("My Game", 1210, 850);
 	Core::RegisterUpdateFn(myUpdate);
 	Core::RegisterDrawFn(myDraw);
