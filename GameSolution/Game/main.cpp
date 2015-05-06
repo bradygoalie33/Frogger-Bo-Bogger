@@ -10,7 +10,6 @@ int baseY = 2;
 
 enum gameStates { Menu, GameOver, Paused, Playing };
 static gameStates gameState = Playing;
-static bool hitCar = false;
 static bool moveUp = false;
 static bool moveDown = false;
 static bool moveLeft = false;
@@ -115,10 +114,10 @@ struct Car
 			bottomRight.x = 1190 + startingPoint;
 		}
 		else{
-			topLeft.x -= 1;
-			topRight.x -= 1;
-			bottomLeft.x -= 1;
-			bottomRight.x -= 1;
+			topLeft.x -= 18;
+			topRight.x -= 18;
+			bottomLeft.x -= 18;
+			bottomRight.x -= 18;
 
 		}
 	}
@@ -490,18 +489,15 @@ void checkKeyInput()
 	}
 }
 
-bool collisionLogic()
+void collisionLogic()
 {
-	//cout << "car " << car.topLeft.x << endl;
-	//cout << "frog " << frog.rightUpLegLower.x + frog.meBase.x << endl;
-
 	if (frog.meBase.y == -85){
 		if (frog.rightUpLegLower.x >= car.topLeft.x && frog.rightUpLegLower.x <= car.topRight.x){
-			hitCar = true;
+			gameState = GameOver;
 			cout << "shit" << endl;
 		}
 		else if (frog.rightUpLegLower.x >= car1.bottomLeft.x && frog.rightUpLegLower.x <= car1.topRight.x){
-			hitCar = true;
+			gameState = GameOver;
 			cout << "shit snax" << endl;
 		}
 		
@@ -509,32 +505,30 @@ bool collisionLogic()
 
 	else if (frog.meBase.y == -170){
 		if (frog.leftUpLegLower.x >= car2.bottomLeft.x && frog.leftUpLegLower.x <= car2.topRight.x){
-			hitCar = true;
+			gameState = GameOver;
 			cout << "shit snax2" << endl;
 		}
 	}
 
 	else if (frog.meBase.y == -255){
 		if (frog.leftUpLegLower.x >= car3three.bottomLeft.x && frog.leftUpLegLower.x <= car3.topRight.x){
-			hitCar = true;
+			gameState = GameOver;
 			cout << "shit snax3" << endl;
 		}
 	}
 
 	else if (frog.meBase.y == -340){
 		if (frog.rightUpLegLower.x >= car4.bottomLeft.x && frog.rightUpLegLower.x <= car4.topRight.x){
-			hitCar = true;
+			gameState = GameOver;
 			cout << "shit snax4" << endl;
 		}
 	}
 	else if (frog.meBase.y == -425){
 		if (frog.leftUpLegLower.x >= car5.bottomLeft.x && frog.leftUpLegLower.x <= car5.topRight.x){
-			hitCar = true;
+			gameState = GameOver;
 			cout << "shit snax5" << endl;
 		}
 	}
-	
-	return hitCar;
 	
 
 }
@@ -652,6 +646,7 @@ void gameBackground(Core::Graphics& graphics)
 		graphics.DrawLine(1140.0f, 0.0f, 1140.0f, 85.0f);
 
 		//FRONT AND WATERSIDE SAFEZONES
+		//BRADY SUCKS BIG DONG
 		//Outline
 		graphics.DrawLine(0.0f, 254.0f, 1250.0f, 254.0f);
 
