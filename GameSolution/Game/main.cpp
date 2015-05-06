@@ -9,17 +9,18 @@ int baseX = 0;
 int baseY = 2;
 
 enum gameStates { Menu, GameOver, Paused, Playing };
-static gameStates gameState = Playing;
+static gameStates gameState = Menu;
 static bool moveUp = false;
 static bool moveDown = false;
 static bool moveLeft = false;
 static bool moveRight = false;
 static bool gameStarting = true;
+static bool systemKill = false;
 
 static float frogX = 0;
 static float frogY = 0;
 
-static float cursorY = 525;
+static float cursorY = 450;
 
 static float car1X = 20;
 static float car1Y = 20;
@@ -487,6 +488,35 @@ void checkKeyInput()
 		else if (!Core::Input::IsPressed(Core::Input::KEY_LEFT) && moveLeft == true)
 			moveLeft = false;
 	}
+	else if (gameState == Menu)
+	{
+		if (Core::Input::IsPressed(Core::Input::KEY_UP) && moveUp == false && cursorY != 450)
+		{
+			cursorY -= 25;
+			
+			moveUp = true;
+		}
+		else if (!Core::Input::IsPressed(Core::Input::KEY_UP) && moveUp == true)
+			moveUp = false;
+
+		if (Core::Input::IsPressed(Core::Input::KEY_DOWN) && moveDown == false && cursorY != 475)
+		{
+			cursorY += 25;
+			moveDown = true;
+		}
+		else if (!Core::Input::IsPressed(Core::Input::KEY_DOWN) && moveDown == true)
+			moveDown = false;
+
+		if (Core::Input::IsPressed(32) && cursorY == 475)
+		{
+			systemKill = true;
+		}
+		else if (Core::Input::IsPressed(32) && cursorY != 475)
+		{
+			gameState = Playing;
+		}
+	}
+		
 }
 
 void collisionLogic()
@@ -556,7 +586,7 @@ bool myUpdate(float dt)
 	}
 	checkKeyInput();
 
-	return false;
+	return systemKill;
 }
 
 void gameBackground(Core::Graphics& graphics)
@@ -567,7 +597,7 @@ void gameBackground(Core::Graphics& graphics)
 		graphics.DrawString(1110/2, 850/2, "IT'S FROGGER");
 		graphics.DrawString(1110 / 2, 900 / 2, "NEW GAME");
 		graphics.DrawString(1110 / 2, 950 / 2, "I'M OUT");
-		Ellipse(graphics.memDC, 530, 500, 540, 490);
+		Ellipse(graphics.memDC, 530, cursorY, 540, cursorY + 10);
 	}
 	
 	else if (gameState == Playing){
