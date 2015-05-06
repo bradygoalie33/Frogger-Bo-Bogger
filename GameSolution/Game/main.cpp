@@ -107,7 +107,7 @@ struct Car
 		drawLine(g, bottomLeft, topLeft);
 	}
 	void integrate(){
-		if (topLeft.x <= -100 + startingPoint)
+		if (topLeft.x <= -200 + startingPoint)
 		{		
 			topLeft.x = 1100 + startingPoint;
 			topRight.x = 1190 + startingPoint;
@@ -159,10 +159,10 @@ struct Car2
 			g.SetColor(RGB(255, 255, 255));
 		}
 
-		drawLine(g, meBase + topLeft, meBase + topRight);
-		drawLine(g, meBase + topRight, meBase + bottomRight);
-		drawLine(g, meBase + bottomRight, meBase + bottomLeft);
-		drawLine(g, meBase + bottomLeft, meBase + topLeft);
+		drawLine(g,topLeft,topRight);
+		drawLine(g,topRight,bottomRight);
+		drawLine(g,bottomRight,bottomLeft);
+		drawLine(g,bottomLeft,topLeft);
 	}
 	void integrate(){
 		if (topRight.x >= 1400)
@@ -222,10 +222,10 @@ struct Car3
 			g.SetColor(RGB(255, 255, 255));
 		}
 
-		drawLine(g, meBase + topLeft, meBase + topRight);
-		drawLine(g, meBase + topRight, meBase + bottomRight);
-		drawLine(g, meBase + bottomRight, meBase + bottomLeft);
-		drawLine(g, meBase + bottomLeft, meBase + topLeft);
+		drawLine(g, topLeft, topRight);
+		drawLine(g, topRight,  bottomRight);
+		drawLine(g, bottomRight,  bottomLeft);
+		drawLine(g,  bottomLeft,  topLeft);
 	}
 	void integrate(){
 		if (topRight.x >= 1600-startingPoint)
@@ -280,10 +280,10 @@ struct Car4
 			g.SetColor(RGB(255, 255, 255));
 		}
 
-		drawLine(g, meBase + topLeft, meBase + topRight);
-		drawLine(g, meBase + topRight, meBase + bottomRight);
-		drawLine(g, meBase + bottomRight, meBase + bottomLeft);
-		drawLine(g, meBase + bottomLeft, meBase + topLeft);
+		drawLine(g,topLeft,topRight);
+		drawLine(g,topRight,bottomRight);
+		drawLine(g,bottomRight,bottomLeft);
+		drawLine(g,bottomLeft,topLeft);
 	}
 	void integrate(){
 		if (topLeft.x <= -200)
@@ -338,10 +338,10 @@ struct Car5
 			g.SetColor(RGB(255, 255, 255));
 		}
 
-		drawLine(g, meBase + topLeft, meBase + topRight);
-		drawLine(g, meBase + topRight, meBase + bottomRight);
-		drawLine(g, meBase + bottomRight, meBase + bottomLeft);
-		drawLine(g, meBase + bottomLeft, meBase + topLeft);
+		drawLine(g,topLeft,topRight);
+		drawLine(g,topRight,bottomRight);
+		drawLine(g,bottomRight,bottomLeft);
+		drawLine(g,bottomLeft,topLeft);
 		
 	}
 	void integrate(){
@@ -366,7 +366,7 @@ struct Car5
 };
 
 Car car(0.0f);
-Car car1(200.0f);
+Car car1(150.0f);
 Car2 car2;
 Car3 car3(0.0f);
 Car3 car3two(150.0f);
