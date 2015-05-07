@@ -410,10 +410,10 @@ struct Log
 			bottomRight.x = 0;
 		}
 		else{
-			topLeft.x += 5;
-			topRight.x += 5;
-			bottomLeft.x += 5;
-			bottomRight.x += 5;
+			topLeft.x += 6;
+			topRight.x += 6;
+			bottomLeft.x += 6;
+			bottomRight.x += 6;
 
 		}
 	}
@@ -456,10 +456,10 @@ struct Log2
 			bottomRight.x = 1450;
 		}
 		else{
-			topLeft.x -= 5;
-			topRight.x -= 5;
-			bottomLeft.x -= 5;
-			bottomRight.x -= 5;
+			topLeft.x -= 4;
+			topRight.x -= 4;
+			bottomLeft.x -= 4;
+			bottomRight.x -= 4;
 
 		}
 	}
@@ -634,46 +634,50 @@ void checkKeyInput()
 
 void collisionLogic()
 {
+	int froggyRightX = frog.rightUpLegLower.x + frog.meBase.x;
+	int froggyLeftX = frog.leftUpLegLower.x + frog.meBase.x;
+
 	if (frog.meBase.y == -85){
-		if (frog.rightUpLegLower.x >= car.topLeft.x && frog.rightUpLegLower.x <= car.topRight.x){
-			//gameState = GameOver;
+		
+		if (froggyRightX >= car.topLeft.x && froggyRightX <= car.topRight.x){
+			gameState = GameOver;
 			
 		}
-		else if (frog.rightUpLegLower.x >= car1.bottomLeft.x && frog.rightUpLegLower.x <= car1.topRight.x){
-			//gameState = GameOver;
+		else if (froggyRightX >= car1.bottomLeft.x && froggyRightX <= car1.topRight.x){
+			gameState = GameOver;
 			
 		}
 		
 	}
 
 	else if (frog.meBase.y == -170){
-		if (frog.leftUpLegLower.x >= car2.bottomLeft.x && frog.leftUpLegLower.x <= car2.topRight.x){
-			//gameState = GameOver;
+		if (froggyLeftX >= car2.bottomLeft.x && froggyLeftX <= car2.topRight.x){
+			gameState = GameOver;
 			
 		}
 	}
 
 	else if (frog.meBase.y == -255){
-		if (frog.leftUpLegLower.x >= car3three.bottomLeft.x && frog.leftUpLegLower.x <= car3.topRight.x){
-			//gameState = GameOver;
+		if (froggyLeftX >= car3three.bottomLeft.x && froggyLeftX <= car3.topRight.x){
+			gameState = GameOver;
 			
 		}
 	}
 
 	else if (frog.meBase.y == -340){
 		if (frog.rightUpLegLower.x >= car4.bottomLeft.x && frog.rightUpLegLower.x <= car4.topRight.x){
-			//gameState = GameOver;
+			gameState = GameOver;
 			
 		}
 	}
 	else if (frog.meBase.y == -425){
-		if (frog.leftUpLegLower.x >= car5.bottomLeft.x && frog.leftUpLegLower.x <= car5.topRight.x){
-			//gameState = GameOver;
+		if (froggyRightX >= car5.bottomLeft.x && froggyRightX <= car5.topRight.x){
+			gameState = GameOver;
 			
 		}
 	}
 	else if (frog.meBase.y == -595){
-		if (frog.leftUpLegLower.x >= logie.bottomLeft.x && frog.leftUpLegLower.x <= logie.topRight.x){
+		if (froggyRightX - 50>= logie.bottomLeft.x - 10 && froggyLeftX <= logie.topRight.x - 50){
 			
 		}
 		else{
@@ -681,25 +685,36 @@ void collisionLogic()
 		}
 	}
 	else if (frog.meBase.y == -680){
-		if (frog.leftUpLegLower.x >= logie2.bottomLeft.x && frog.leftUpLegLower.x <= logie2.topRight.x){
+		if (froggyLeftX - 50 >= logie2.bottomLeft.x && froggyRightX - 50 <= logie2.topRight.x){
 			
 		}
 		else{
 			gameState = GameOver;
 		}
 	}
-	/*else if (frog.meBase.y == -680){
-		if (){
-
+	else if (frog.meBase.y == -765){
+		
+		if (frog.meBase.x >= -525 && frog.meBase.x <= -450){
+			gameState = Win;
+		}
+		else if (frog.meBase.x >= -225 && frog.meBase.x <= -150){
+			gameState = Win;
+		}
+		else if (frog.meBase.x >= 75 && frog.meBase.x <= 150){
+			gameState = Win;
+		}
+		else if (frog.meBase.x >= 375 && frog.meBase.x <= 450){
+			gameState = Win;
+		}
+		else
+		{
+			gameState = GameOver;
 		}
 	}
-	*/
+	
 }
 
-void gameLogic()
-{
 
-}
 
 bool myUpdate(float dt)
 {
@@ -716,7 +731,6 @@ bool myUpdate(float dt)
 		car5.integrate();
 		logie.integrate();
 		logie2.integrate();
-		gameLogic();
 		collisionLogic();
 	}
 	checkKeyInput();
