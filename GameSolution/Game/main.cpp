@@ -42,6 +42,15 @@ static float car5X = 20;
 static float car5Y = 20;
 static bool car5MoveRight = true;
 
+static float logX = 20;
+static float logY = 20;
+static bool logMoveRight = true;
+
+static float log2X = 20;
+static float log2Y = 20;
+static bool log2MoveRight = true;
+
+
 
 
 struct Point
@@ -362,6 +371,98 @@ struct Car5
 		}
 			
 	}
+};
+
+struct Log
+{
+	Point topLeft;
+	Point topRight;
+	Point bottomLeft;
+	Point bottomRight;
+
+	Point meBase;
+	Point velocity;
+
+	Log() :
+		meBase(logX, logY),
+		topLeft(0, 155),
+		topRight(300, 155),
+		bottomLeft(0, 230),
+		bottomRight(300, 230)
+
+	{}
+
+	void drawthyself(Core::Graphics& g){
+		g.SetColor(RGB(255, 255, 255));
+		
+
+		drawLine(g, meBase + topLeft, meBase + topRight);
+		drawLine(g, meBase + topRight, meBase + bottomRight);
+		drawLine(g, meBase + bottomRight, meBase + bottomLeft);
+		drawLine(g, meBase + bottomLeft, meBase + topLeft);
+	}
+	void integrate(){
+		if (topRight.x >= 1400)
+		{
+			topLeft.x = -300;
+			topRight.x = 0;
+			bottomLeft.x = -300;
+			bottomRight.x = 0;
+		}
+		else{
+			topLeft.x += 5;
+			topRight.x += 5;
+			bottomLeft.x += 5;
+			bottomRight.x += 5;
+
+		}
+	}
+
+};
+
+struct Log2
+{
+	Point topLeft;
+	Point topRight;
+	Point bottomLeft;
+	Point bottomRight;
+
+	Point meBase;
+	Point velocity;
+
+	Log2() :
+		meBase(log2X, log2Y),
+		topLeft(935, 70),
+		topRight(1235, 70),
+		bottomLeft(935, 150),
+		bottomRight(1235, 150)
+
+	{}
+
+	void drawthyself(Core::Graphics& g){
+		g.SetColor(RGB(255, 255, 255));
+
+		drawLine(g, meBase + topLeft, meBase + topRight);
+		drawLine(g, meBase + topRight, meBase + bottomRight);
+		drawLine(g, meBase + bottomRight, meBase + bottomLeft);
+		drawLine(g, meBase + bottomLeft, meBase + topLeft);
+	}
+	void integrate(){
+		if (topLeft.x <= -200)
+		{
+			topLeft.x = 1150;
+			topRight.x = 1450;
+			bottomLeft.x = 1150;
+			bottomRight.x = 1450;
+		}
+		else{
+			topLeft.x -= 5;
+			topRight.x -= 5;
+			bottomLeft.x -= 5;
+			bottomRight.x -= 5;
+
+		}
+	}
 
 };
 
@@ -373,6 +474,9 @@ Car3 car3two(150.0f);
 Car3 car3three(300.0f);
 Car4 car4;
 Car5 car5;
+Log logie;
+Log2 logie2;
+
 
 
 
@@ -532,11 +636,11 @@ void collisionLogic()
 {
 	if (frog.meBase.y == -85){
 		if (frog.rightUpLegLower.x >= car.topLeft.x && frog.rightUpLegLower.x <= car.topRight.x){
-			gameState = GameOver;
+			//gameState = GameOver;
 			
 		}
 		else if (frog.rightUpLegLower.x >= car1.bottomLeft.x && frog.rightUpLegLower.x <= car1.topRight.x){
-			gameState = GameOver;
+			//gameState = GameOver;
 			
 		}
 		
@@ -544,32 +648,52 @@ void collisionLogic()
 
 	else if (frog.meBase.y == -170){
 		if (frog.leftUpLegLower.x >= car2.bottomLeft.x && frog.leftUpLegLower.x <= car2.topRight.x){
-			gameState = GameOver;
+			//gameState = GameOver;
 			
 		}
 	}
 
 	else if (frog.meBase.y == -255){
 		if (frog.leftUpLegLower.x >= car3three.bottomLeft.x && frog.leftUpLegLower.x <= car3.topRight.x){
-			gameState = GameOver;
+			//gameState = GameOver;
 			
 		}
 	}
 
 	else if (frog.meBase.y == -340){
 		if (frog.rightUpLegLower.x >= car4.bottomLeft.x && frog.rightUpLegLower.x <= car4.topRight.x){
-			gameState = GameOver;
+			//gameState = GameOver;
 			
 		}
 	}
 	else if (frog.meBase.y == -425){
 		if (frog.leftUpLegLower.x >= car5.bottomLeft.x && frog.leftUpLegLower.x <= car5.topRight.x){
-			gameState = GameOver;
+			//gameState = GameOver;
 			
 		}
 	}
-	
+	else if (frog.meBase.y == -595){
+		if (frog.leftUpLegLower.x >= logie.bottomLeft.x && frog.leftUpLegLower.x <= logie.topRight.x){
+			
+		}
+		else{
+			gameState = GameOver;
+		}
+	}
+	else if (frog.meBase.y == -680){
+		if (frog.leftUpLegLower.x >= logie2.bottomLeft.x && frog.leftUpLegLower.x <= logie2.topRight.x){
+			
+		}
+		else{
+			gameState = GameOver;
+		}
+	}
+	/*else if (frog.meBase.y == -680){
+		if (){
 
+		}
+	}
+	*/
 }
 
 void gameLogic()
@@ -590,6 +714,8 @@ bool myUpdate(float dt)
 		car3three.integrate();
 		car4.integrate();
 		car5.integrate();
+		logie.integrate();
+		logie2.integrate();
 		gameLogic();
 		collisionLogic();
 	}
@@ -735,6 +861,8 @@ void myDraw(Core::Graphics & graphics)
 		car3three.drawthyself(graphics);
 		car4.drawthyself(graphics);
 		car5.drawthyself(graphics);
+		logie.drawthyself(graphics);
+		logie2.drawthyself(graphics);
 	}
 }
 
