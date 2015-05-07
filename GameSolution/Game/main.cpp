@@ -8,7 +8,7 @@ using std::string;
 int baseX = 0;
 int baseY = 2;
 
-enum gameStates { Menu, GameOver, Paused, Playing };
+enum gameStates { Menu, GameOver, Win, Playing };
 static gameStates gameState = Menu;
 static bool moveUp = false;
 static bool moveDown = false;
@@ -107,18 +107,18 @@ struct Car
 		drawLine(g, bottomLeft, topLeft);
 	}
 	void integrate(){
-		if (topLeft.x <= -100 + startingPoint)
+		if (topLeft.x <= -250 + startingPoint)
 		{		
-			topLeft.x = 1100 + startingPoint;
-			topRight.x = 1190 + startingPoint;
-			bottomLeft.x = 1100 + startingPoint;
-			bottomRight.x = 1190 + startingPoint;
+			topLeft.x = 1190 + startingPoint;
+			topRight.x = 1280 + startingPoint;
+			bottomLeft.x = 1190 + startingPoint;
+			bottomRight.x = 1280 + startingPoint;
 		}
 		else{
-			topLeft.x -= 18;
-			topRight.x -= 18;
-			bottomLeft.x -= 18;
-			bottomRight.x -= 18;
+			topLeft.x -= 20;
+			topRight.x -= 20;
+			bottomLeft.x -= 20;
+			bottomRight.x -= 20;
 
 		}
 	}
@@ -167,16 +167,16 @@ struct Car2
 	void integrate(){
 		if (topRight.x >= 1400)
 		{
-			topLeft.x = 0;
-			topRight.x = 90;
-			bottomLeft.x = 0;
-			bottomRight.x = 90;
+			topLeft.x = -90;
+			topRight.x = 0;
+			bottomLeft.x = -90;
+			bottomRight.x = 0;
 		}
 		else{
-			topLeft.x += 18;
-			topRight.x += 18;
-			bottomLeft.x += 18;
-			bottomRight.x += 18;
+			topLeft.x += 20;
+			topRight.x += 20;
+			bottomLeft.x += 20;
+			bottomRight.x += 20;
 
 		}
 	}
@@ -230,16 +230,16 @@ struct Car3
 	void integrate(){
 		if (topRight.x >= 1600-startingPoint)
 		{
-			topLeft.x = 0 - startingPoint;
-			topRight.x = 90 - startingPoint;
-			bottomLeft.x = 0 - startingPoint;
-			bottomRight.x = 90 - startingPoint;
+			topLeft.x = -90 - startingPoint;
+			topRight.x = 0 - startingPoint;
+			bottomLeft.x = -90 - startingPoint;
+			bottomRight.x = 0 - startingPoint;
 		}
 		else{
-			topLeft.x += 18;
-			topRight.x += 18;
-			bottomLeft.x += 18;
-			bottomRight.x += 18;
+			topLeft.x += 14;
+			topRight.x += 14;
+			bottomLeft.x += 14;
+			bottomRight.x += 14;
 
 		}
 	}
@@ -288,16 +288,16 @@ struct Car4
 	void integrate(){
 		if (topLeft.x <= -200)
 		{
-			topLeft.x = 1000;
-			topRight.x = 1150;
-			bottomLeft.x = 1000;
-			bottomRight.x = 1150;
+			topLeft.x = 1150;
+			topRight.x = 1300;
+			bottomLeft.x = 1150;
+			bottomRight.x = 1300;
 		}
 		else{
-			topLeft.x -= 18;
-			topRight.x -= 18;
-			bottomLeft.x -= 18;
-			bottomRight.x -= 18;
+			topLeft.x -= 20;
+			topRight.x -= 20;
+			bottomLeft.x -= 20;
+			bottomRight.x -= 20;
 
 		}
 	}
@@ -348,16 +348,16 @@ struct Car5
 
 		if (meBase.x + topRight.x >= 1400)
 		{
-			topLeft.x = 0;
-			topRight.x = 120;
-			bottomLeft.x = 0;
-			bottomRight.x = 120;
+			topLeft.x = -120;
+			topRight.x = 0;
+			bottomLeft.x = -120;
+			bottomRight.x = 0;
 		}
 		else{
-			topLeft.x += 18;
-			topRight.x += 18;
-			bottomLeft.x += 18;
-			bottomRight.x += 18;
+			topLeft.x += 22;
+			topRight.x += 22;
+			bottomLeft.x += 22;
+			bottomRight.x += 22;
 
 		}
 			
@@ -445,9 +445,17 @@ struct Frog
 			meBase = velocity;
 			
 		}
+		
+		
 };
 
 Frog frog;
+
+void resetFrog()
+{
+	frog.velocity.y = 0;
+	frog.velocity.x = 0;
+}
 
 void checkKeyInput()
 {
@@ -488,7 +496,7 @@ void checkKeyInput()
 		else if (!Core::Input::IsPressed(Core::Input::KEY_LEFT) && moveLeft == true)
 			moveLeft = false;
 	}
-	else if (gameState == Menu)
+	else if (gameState == Menu || gameState == GameOver || gameState == Win)
 	{
 		if (Core::Input::IsPressed(Core::Input::KEY_UP) && moveUp == false && cursorY != 450)
 		{
@@ -513,6 +521,7 @@ void checkKeyInput()
 		}
 		else if (Core::Input::IsPressed(32) && cursorY != 475)
 		{
+		
 			gameState = Playing;
 		}
 	}
@@ -524,11 +533,11 @@ void collisionLogic()
 	if (frog.meBase.y == -85){
 		if (frog.rightUpLegLower.x >= car.topLeft.x && frog.rightUpLegLower.x <= car.topRight.x){
 			gameState = GameOver;
-			cout << "shit" << endl;
+			
 		}
 		else if (frog.rightUpLegLower.x >= car1.bottomLeft.x && frog.rightUpLegLower.x <= car1.topRight.x){
 			gameState = GameOver;
-			cout << "shit snax" << endl;
+			
 		}
 		
 	}
@@ -536,27 +545,27 @@ void collisionLogic()
 	else if (frog.meBase.y == -170){
 		if (frog.leftUpLegLower.x >= car2.bottomLeft.x && frog.leftUpLegLower.x <= car2.topRight.x){
 			gameState = GameOver;
-			cout << "shit snax2" << endl;
+			
 		}
 	}
 
 	else if (frog.meBase.y == -255){
 		if (frog.leftUpLegLower.x >= car3three.bottomLeft.x && frog.leftUpLegLower.x <= car3.topRight.x){
 			gameState = GameOver;
-			cout << "shit snax3" << endl;
+			
 		}
 	}
 
 	else if (frog.meBase.y == -340){
 		if (frog.rightUpLegLower.x >= car4.bottomLeft.x && frog.rightUpLegLower.x <= car4.topRight.x){
 			gameState = GameOver;
-			cout << "shit snax4" << endl;
+			
 		}
 	}
 	else if (frog.meBase.y == -425){
 		if (frog.leftUpLegLower.x >= car5.bottomLeft.x && frog.leftUpLegLower.x <= car5.topRight.x){
 			gameState = GameOver;
-			cout << "shit snax5" << endl;
+			
 		}
 	}
 	
@@ -592,14 +601,36 @@ bool myUpdate(float dt)
 void gameBackground(Core::Graphics& graphics)
 {	
 	
-	if (gameState == Menu){
+	if (gameState == Menu)
+	{
 
-		graphics.DrawString(1110/2, 850/2, "IT'S FROGGER");
+		graphics.DrawString(1100/2, 850/3, "FROGGER-BO-BOGGER");
 		graphics.DrawString(1110 / 2, 900 / 2, "NEW GAME");
 		graphics.DrawString(1110 / 2, 950 / 2, "I'M OUT");
 		Ellipse(graphics.memDC, 530, cursorY, 540, cursorY + 10);
 	}
 	
+	else if (gameState == GameOver)
+	{
+		graphics.DrawString(1100 / 2, 850 / 3, "GAME OVER!!!");
+		graphics.DrawString(1110 / 2, 900 / 2, "RESTART GAME");
+		graphics.DrawString(1110 / 2, 950 / 2, "RAGE QUIT");
+		Ellipse(graphics.memDC, 530, cursorY, 540, cursorY + 10);
+		resetFrog();
+		
+
+	}
+	else if (gameState == Win)
+	{
+		graphics.DrawString(1100 / 2, 850 / 3, "YOU WIN!!!!");
+		graphics.DrawString(1110 / 2, 900 / 2, "PLAY AGAIN?");
+		graphics.DrawString(1110 / 2, 950 / 2, "RETIRE AS A CHAMPION");
+		Ellipse(graphics.memDC, 530, cursorY, 540, cursorY + 10);
+		resetFrog();
+
+
+	}
+
 	else if (gameState == Playing){
 		int i;
 		int k;
@@ -676,7 +707,7 @@ void gameBackground(Core::Graphics& graphics)
 		graphics.DrawLine(1140.0f, 0.0f, 1140.0f, 85.0f);
 
 		//FRONT AND WATERSIDE SAFEZONES
-		//BRADY SUCKS BIG DONG
+		
 		//Outline
 		graphics.DrawLine(0.0f, 254.0f, 1250.0f, 254.0f);
 
